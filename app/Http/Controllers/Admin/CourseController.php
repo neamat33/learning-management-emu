@@ -139,11 +139,14 @@ class CourseController extends Controller
     public function destroy($id)
     {
         try {
-            $this->StudentService->delete($id);
-            return redirect()->route('classes.index')->with('success', 'Deleted successfully');
+            $course= Course::find($id);
+            if($course->delete()){
+                $course->items()->delete();
+            }
+            return redirect()->route('courses.index')->with('success', 'Deleted successfully');
         } catch (\Exception $e) {
             $error_message = $e->getMessage();
-            return redirect()->route('classes.index')->with('error', $error_message);
+            return redirect()->route('courses.index')->with('error', $error_message);
         }
     }
 

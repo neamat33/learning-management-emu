@@ -66,9 +66,19 @@
                                 @endif
 
                             </td>
-                            <td><a href="{{ route('courses.edit',$item->id) }}" 
+                            {{-- <td>
+                                <a href="{{ route('courses.edit',$item->id) }}" 
                                 class="btn btn-primary btn-circle btn-sm"><i class="fa fa-edit text-white"></i>
-                            </a></td>
+                                </a>
+                            </td> --}}
+                            <td>
+                                @can('delete-course')
+                                <a class="btn btn-sm btn-danger" href="" data-bs-toggle="modal" data-bs-target=".delete-modal" onclick="handle({{ $item->id }})"><i class="fas fa-trash"></i>
+                                </a>
+    
+                                @endcan
+                            </td>
+                            
                         </tr>
                         @endforeach
                     </tbody>
@@ -80,9 +90,26 @@
         </div>
 
     </div>
-    <!-- Modal to edit record -->
-       
+   
 
+    
+@include('admin.layouts.delete-modal')
 
+@endsection
+@section('extra_js')
+<script>
 
+    //Delete Code
+
+    function handle(id) {
+
+       var url = "{{ route('courses.destroy', 'party_id') }}".replace('party_id', id);
+
+        $("#delete-form").attr('action', url);
+
+       $("#confirm-modal").modal('show');
+
+     }
+
+</script>
 @endsection

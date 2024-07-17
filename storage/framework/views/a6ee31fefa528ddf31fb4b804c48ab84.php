@@ -66,9 +66,15 @@
                                 <?php endif; ?>
 
                             </td>
-                            <td><a href="<?php echo e(route('courses.edit',$item->id)); ?>" 
-                                class="btn btn-primary btn-circle btn-sm"><i class="fa fa-edit text-white"></i>
-                            </a></td>
+                            
+                            <td>
+                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete-course')): ?>
+                                <a class="btn btn-sm btn-danger" href="" data-bs-toggle="modal" data-bs-target=".delete-modal" onclick="handle(<?php echo e($item->id); ?>)"><i class="fas fa-trash"></i>
+                                </a>
+    
+                                <?php endif; ?>
+                            </td>
+                            
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
@@ -81,11 +87,27 @@
         </div>
 
     </div>
-    <!-- Modal to edit record -->
-       
+   
 
-
+    
+<?php echo $__env->make('admin.layouts.delete-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->stopSection(); ?>
+<?php $__env->startSection('extra_js'); ?>
+<script>
 
+    //Delete Code
+
+    function handle(id) {
+
+       var url = "<?php echo e(route('courses.destroy', 'party_id')); ?>".replace('party_id', id);
+
+        $("#delete-form").attr('action', url);
+
+       $("#confirm-modal").modal('show');
+
+     }
+
+</script>
+<?php $__env->stopSection(); ?>
 <?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH I:\xampp\htdocs\ucc_coaching\resources\views/admin/course/list.blade.php ENDPATH**/ ?>
