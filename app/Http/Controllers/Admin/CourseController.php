@@ -45,6 +45,8 @@ class CourseController extends Controller
     public function store(Request $request)
     {
 
+        dd($request->all());
+
         $validated = $request->validate([
             'course_title' => 'required|max:128',
             'course_description' => "required",

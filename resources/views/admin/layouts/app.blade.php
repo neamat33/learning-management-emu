@@ -103,7 +103,7 @@
                     </script>
                     , made with ❤️ by <a href="https://www.facebook.com/neamat33" target="_blank" class="fw-medium">Neamat Ullah</a>
                   </div>
-                  
+
                 </div>
               </div>
             </footer>
@@ -124,7 +124,7 @@
     </div>
     <!-- / Layout wrapper -->
 
-    
+
     {{-- toastr --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <!-- Core JS -->
