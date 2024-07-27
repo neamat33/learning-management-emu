@@ -21,7 +21,11 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>\n\
                     </select>\n\
                 </td>';
-            cols += '<td>\n\<textarea name="description[]" cols="60" rows="1" class="form-control  item-details"></textarea>\n\
+            cols += '<td>\n\<div class="form-group sizes"><div class="row">\n\
+                        <div class="col-8">\n\
+                            <input type="text" name="size[]" class="form-control mt-1">\n\
+                        </div>\n\
+                        <div class="col-1"></div></div></div><a href="" class="btn btn-sm btn-success mt-1 add_input" style=""><i class="fa fa-plus"> Add</i></a>\n\
                     </td>';
       
             cols += '<td><button class="btn bg-gradient-danger deleteRow"><span class="fa fa-remove"></span></button></td>';
@@ -37,5 +41,24 @@
         });
 
     });
+
+    //add description
+    $(".add_input").click(function(event){
+            // alert("hello");
+            event.preventDefault();
+            $(".sizes").append(`<div class="row">
+                  <div class="col-8">
+                      <input type="text" name="size[]" class="form-control mt-1">
+                  </div>
+                  <div class="col-1">
+                      <a href="" class="btn btn-danger remove_parent" style="">X</a>
+                  </div>
+                </div>`);
+        });
+
+        $(document).on('click', '.remove_parent',function(){
+            event.preventDefault();
+            $(this).parent().parent().remove();
+        });
 </script>
 <?php /**PATH I:\xampp\htdocs\ucc_coaching\resources\views/admin/course/scripts.blade.php ENDPATH**/ ?>

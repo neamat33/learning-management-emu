@@ -136,8 +136,21 @@
 
                                         </td>
                                         <td>
-                                            <textarea name="description[]" id="item_details" cols="60" rows="1" class="form-control item-details"
-                                                style="min-width: 150px" required></textarea>
+                                            <div class="form-group sizes">
+                                                <?php if($errors->has('size')): ?>
+                                                <div class="alert alert-danger"><?php echo e($errors->first('size')); ?></div>
+                                                <?php endif; ?>
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <input type="text" name="size[]" class="form-control mt-1">
+                                                    </div>
+                                                    <div class="col-1">
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                            <a href="" class="btn btn-sm btn-success mt-1 add_input" style=""><i class="fa fa-plus"> Add</i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -177,6 +190,25 @@
                 yearRange: '1900:+0', // Set the range of years
                 // You can add more options as needed
             });
+        });
+
+        //add description
+        $(".add_input").click(function(event){
+            // alert("hello");
+            event.preventDefault();
+            $(".sizes").append(`<div class="row">
+                  <div class="col-8">
+                      <input type="text" name="size[]" class="form-control mt-1">
+                  </div>
+                  <div class="col-1">
+                      <a href="" class="btn btn-danger remove_parent" style="">X</a>
+                  </div>
+                </div>`);
+        });
+
+        $(document).on('click', '.remove_parent',function(){
+            event.preventDefault();
+            $(this).parent().parent().remove();
         });
     </script>
     <?php echo $__env->make('admin.course.scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
