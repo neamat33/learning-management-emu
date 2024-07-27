@@ -27,7 +27,8 @@
                                 <?php endif; ?>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="" class="mb-2"><b>Course Catgeory </b><span class="text-danger">*</span></label>
+                                <label for="" class="mb-2"><b>Course Catgeory </b><span
+                                        class="text-danger">*</span></label>
                                 <select name="category_id" id="category_id" class="form-control" required>
                                     <option value="">Select Item</option>
                                     <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -95,67 +96,66 @@
                             </div>
                         </div>
 
-                        <div class="col-md-1 mt-5" id="addrow">
-                            <button type="button" class="btn btn-sm btn-primary mb-1" >Add</button>
-                        </div>
+                        <div class="mt-5">
+                            <div class="col-md-1 mb-1" id="addrow">
+                                <button type="button" class="btn btn-sm btn-primary mb-1">Add</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-responsive-md mytable">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 30%"><strong>Subject</strong></th>
+                                            <th style="width: 30%"><strong>Instructor</strong></th>
+                                            <th style="width: 40%"><strong>Lesson</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="subjectRows">
+                                        <tr class="subject-row">
+                                            <td>
+                                                <select name="subject[]" class="select1 form-control"
+                                                    style="min-width: 100px" required>
+                                                    <option value="">Select Item</option>
+                                                    <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($val->id); ?>"><?php echo e($val->subject_name); ?>
 
-                        <div class="table-responsive">
-                            <table class="table table-responsive-md mytable">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 30%"><strong>Subject</strong></th>
-                                        <th style="width: 30%"><strong>Instructor</strong></th>
-                                        <th style="width: 40%"><strong>Description</strong></th>
+                                                        </option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select name="instructor[]" class="select1 form-control"
+                                                    style="min-width: 100px" required>
+                                                    <option value="">Select Item</option>
+                                                    <?php $__currentLoopData = $instructors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $instructor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($instructor->id); ?>"><?php echo e($instructor->name); ?>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <select name="subject[]" id="select2" class="select1 form-control"
-                                                style="min-width: 100px" required>
-                                                <option value="">Select Item</option>
-                                                <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($val->id); ?>"><?php echo e($val->subject_name); ?>
-
-                                                    </option>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            </select>
-
-                                        </td>
-                                        <td>
-                                            <select name="instructor[]" class="select1 form-control"
-                                                style="min-width: 100px" required>
-                                                <option value="">Select Item</option>
-                                                <?php $__currentLoopData = $instructors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $instructor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($instructor->id); ?>"><?php echo e($instructor->name); ?>
-
-                                                    </option>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            </select>
-
-                                        </td>
-                                        <td>
-                                            <div class="form-group sizes">
-                                                <?php if($errors->has('size')): ?>
-                                                <div class="alert alert-danger"><?php echo e($errors->first('size')); ?></div>
-                                                <?php endif; ?>
-                                                <div class="row">
-                                                    <div class="col-8">
-                                                        <input type="text" name="size[]" class="form-control mt-1">
-                                                    </div>
-                                                    <div class="col-1">
-                                                       
+                                                        </option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <div class="form-group chapter">
+                                                    <div class="row">
+                                                        <div class="col-10">
+                                                            <button type="button"
+                                                                class="btn btn-sm btn-success mt-1 add-chapter">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                            <input type="text" name="chapter[0][]"
+                                                                class="form-control mt-1">
+                                                            
+                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
-                                            </div>
-                
-                                            <a href="" class="btn btn-sm btn-success mt-1 add_input" style=""><i class="fa fa-plus"> Add</i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                                <div class="chapter-container"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+
 
                         <div style="text-align:right">
                             <div class="mt-3">
@@ -177,7 +177,6 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('extra_js'); ?>
     <script>
-        
         var jq = $.noConflict();
         jq(document).ready(function() {
             $("#select2").select2();
@@ -191,27 +190,86 @@
                 // You can add more options as needed
             });
         });
+    </script>
 
-        //add description
-        $(".add_input").click(function(event){
-            // alert("hello");
-            event.preventDefault();
-            $(".sizes").append(`<div class="row">
-                  <div class="col-8">
-                      <input type="text" name="size[]" class="form-control mt-1">
-                  </div>
-                  <div class="col-1">
-                      <a href="" class="btn btn-danger remove_parent" style="">X</a>
-                  </div>
-                </div>`);
-        });
+    <script>
+        $(document).ready(function() {
+            let subjectIndex = 1;
 
-        $(document).on('click', '.remove_parent',function(){
-            event.preventDefault();
-            $(this).parent().parent().remove();
+            $('#addrow').click(function() {
+                let newRow = `
+                <tr class="subject-row">
+                    <td>
+                        <select name="subject[]" class="select1 form-control" style="min-width: 100px" required>
+                            <option value="">Select Item</option>
+                            <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($val->id); ?>"><?php echo e($val->subject_name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="instructor[]" class="select1 form-control" style="min-width: 100px" required>
+                            <option value="">Select Item</option>
+                            <?php $__currentLoopData = $instructors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $instructor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($instructor->id); ?>"><?php echo e($instructor->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="form-group chapter">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <button type="button" class="btn btn-sm btn-success mt-1 add-chapter">
+                                                <span class="fa fa-plus"></span>
+                                            </button>
+                                         </div>   
+                                        <div class="col-4">
+                                            <a href="" class="btn btn-sm btn-danger mt-1 remove_parent" style="">X</a>
+                                         </div>    
+                                    </div>
+                                </div>
+                                         
+                                <div class="col-10">
+                                    <input type="text" name="chapter[${subjectIndex}][]" class="form-control mt-1">
+                                </div>   
+                            </div>
+                        </div>
+                        <div class="chapter-container"></div>
+                    </td>
+                </tr>`;
+                $('#subjectRows').append(newRow);
+                subjectIndex++;
+            });
+
+            $(document).on('click', '.add-chapter', function() {
+                let subjectRowIndex = $(this).closest('.subject-row').index();
+                let chapterInput = `
+                <div class="row mt-2">
+                    <div class="col-10">
+                        <input type="text" name="chapter[${subjectRowIndex}][]" class="form-control">
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-sm btn-danger remove-chapter">
+                            <span> X </span>
+                        </button>
+                    </div>
+                </div>`;
+                $(this).closest('.subject-row').find('.chapter-container').append(chapterInput);
+            });
+
+            $(document).on('click', '.remove-chapter', function() {
+                $(this).closest('.row').remove();
+            });
+
+            $(document).on('click', '.remove_parent', function() {
+                event.preventDefault();
+                $(this).closest('.subject-row').remove();
+            });
         });
     </script>
-    <?php echo $__env->make('admin.course.scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH I:\xampp\htdocs\ucc_coaching\resources\views/admin/course/create.blade.php ENDPATH**/ ?>
