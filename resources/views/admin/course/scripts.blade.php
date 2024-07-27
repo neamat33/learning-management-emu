@@ -1,57 +1,63 @@
 <script>
-    document.getElementById('addRowBtn').addEventListener('click', addRow);
-    document.getElementById('tableBody').addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('add-lesson-btn')) {
-            addLessonRow(e.target);
-        } else if (e.target && e.target.classList.contains('delete-btn')) {
-            deleteRow(e.target);
-        }
+    $(document).ready(function () {
+        var counter = 1;
+
+        $('#addrow').on('click', function () {
+            counter++;
+            var newRow = $("<tr>");
+            var cols = "";
+
+            cols += '<td><select name="subject[]" class="select1 item-select">\n\
+                        <option value="">Select Item</option>\n\
+                        @foreach ($subjects as $val)\n\
+                        <option value="{{ $val->id }}" >{{ $val->subject_name }}</option>\n\
+                        @endforeach\n\
+                    </select>\n\
+                </td>';
+            cols += '<td><select name="instructor[]" class="select1 item-select">\n\
+                        <option value="">Select Item</option>\n\
+                        @foreach ($instructors as $instructor)\n\
+                        <option value="{{ $instructor->id }}">{{ $instructor->name }}</option>\n\
+                        @endforeach\n\
+                    </select>\n\
+                </td>';
+            cols += '<td>\n\<div class="form-group sizes"><div class="row">\n\
+                        <div class="col-8">\n\
+                            <input type="text" name="size[]" class="form-control mt-1">\n\
+                        </div>\n\
+                        <div class="col-1"></div></div></div><a href="" class="btn btn-sm btn-success mt-1 add_input" style=""><i class="fa fa-plus"> Add</i></a>\n\
+                    </td>';
+
+            cols += '<td><button class="btn bg-gradient-danger deleteRow"><span class="fa fa-remove"></span></button></td>';
+            newRow.append(cols);
+            $('table.mytable').append(newRow);
+            $(".select1").select2();
+        });
+
+
+        $(".mytable").on("click", "button.deleteRow", function (event) {
+            $(this).closest("tr").remove();
+
+        });
+
     });
 
-    function addRow() {
-        const tableBody = document.getElementById('tableBody');
-        const newRow = document.createElement('tr');
-        newRow.classList.add('parent-row');
-        newRow.innerHTML = `
-        <td>
-              <select name="details[subject]" id="" class="select1 form-control"
-                                                style="min-width: 100px" required>
-                                                <option value="" selected disabled>Select Item</option>
+    //add description
+    $(".add_input").click(function(event){
+            // alert("hello");
+            event.preventDefault();
+            $(".sizes").append(`<div class="row">
+                  <div class="col-8">
+                      <input type="text" name="size[]" class="form-control mt-1">
+                  </div>
+                  <div class="col-1">
+                      <a href="" class="btn btn-danger remove_parent" style="">X</a>
+                  </div>
+                </div>`);
+        });
 
-        <option value="bangla">Bangla</option>
-        <option value="english">English</option>
-        <option value="arabic">Arabic</option>
-        </select>
-</td>
-<td>
-    <textarea name="details[description]" id="item_details" cols="60" rows="1" class="form-control item-details"
-                                                style="min-width: 150px" required></textarea>
-</td>
-<td>
-<button type="button" class="add-lesson-btn btn btn-sm btn-primary mb-1">Add Lesson</button>
-<button class="delete-btn btn btn-sm btn-danger mb-1"">Delete</button>
-</td>
-`;
-        tableBody.appendChild(newRow);
-    }
-
-    function addLessonRow(button) {
-        const parentRow = button.closest('tr');
-        const lessonRow = document.createElement('tr');
-        lessonRow.classList.add('lesson-row');
-        lessonRow.innerHTML = `
-        <td></td>
-        <td><input type="text" name="details[lesson]" class="form-control" placeholder="Lesson title"></td>
-        <td>
-            <span class="delete-btn btn btn-sm btn-danger">Delete</span>
-        </td>
-    `;
-        parentRow.insertAdjacentElement('afterend', lessonRow);
-    }
-
-    function deleteRow(button) {
-        const row = button.closest('tr');
-        row.remove();
-    }
-
+        $(document).on('click', '.remove_parent',function(){
+            event.preventDefault();
+            $(this).parent().parent().remove();
+        });
 </script>

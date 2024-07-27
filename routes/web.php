@@ -21,7 +21,15 @@ Route::get('clear', function () {
 });
 require('admin.php');
 //web route
+Route::get('/', [\App\Http\Controllers\FrontendController::class, 'index'])->name('home.index');
+Route::get('/courses', [\App\Http\Controllers\FrontendController::class, 'coursePage'])->name('course.page');
+Route::get('/course/details/{id}', [\App\Http\Controllers\FrontendController::class, 'courseDetailsPage'])->name('course.details.page');
 
+Route::get('/dashboard', [\App\Http\Controllers\StudentDashboardController::class, 'dashboard'])->name('student.dashboard.page');
+Route::get('/course_list', [\App\Http\Controllers\StudentDashboardController::class, 'courseList'])->name('student_course.list');
+Route::get('/course_details', [\App\Http\Controllers\StudentDashboardController::class, 'courseDetails'])->name('student_course.details');
+Route::get('/quiz', [\App\Http\Controllers\StudentDashboardController::class, 'quiz'])->name('student_course.quiz');
+Route::get('/profile_update', [\App\Http\Controllers\StudentDashboardController::class, 'updateProfile'])->name('student_profile.update');
 
 
 //Auth::routes();

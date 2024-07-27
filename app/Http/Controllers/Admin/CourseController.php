@@ -10,6 +10,8 @@ use App\Services\BranchService;
 use App\Services\SubjectService;
 use App\Helpers\InputHelper;
 use App\Models\Category;
+use App\Models\Chapter;
+use App\Models\CourseSubject;
 use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
@@ -22,7 +24,7 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $branch_id = session('branch_id');
-        $course =new Course;
+        $course = new Course;
 
         if ($request->name) {
             $course = $course->where('course_title', 'like', '%' . $request->name . '%');
@@ -44,52 +46,56 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-
-        dd($request->all());
-
+        $request->all();
         $validated = $request->validate([
             'course_title' => 'required|max:128',
             'course_description' => "required",
         ]);
 
         try {
-        DB::beginTransaction();
+            DB::beginTransaction();
 
-        if ($request->hasFile('image')) {
-            $item_image = InputHelper::upload($request->image, $this->file_path);
-        } else {
-            $item_image = "";
-        }
-        if ($request->hasFile('class_routine')) {
-            $class_routine = InputHelper::upload($request->class_routine, $this->file_path);
-        } else {
-            $class_routine = "";
-        }
-        $course = Course::create([
-            'category_id' =>  $request->category_id,
-            'course_title' =>  $request->course_title,
-            'start_date'     => $request->start_date,
-            'image'          => $item_image,
-            'class_routine'  => $class_routine,
-            'video'     => $request->video,
-            'price'     => $request->price,
-            'discount_price'     => $request->discount_price,
-            'course_description' => $request->course_description,
-
-        ]);
-
-
-        if ($course) {
-            foreach ($request->subject as $key => $subject_id) {
-                $itemData['course_id'] = $course->id;
-                $itemData['subject_id'] = $subject_id;
-                $itemData['instructor_id'] = $request->instructor[$key];
-                $itemData['description'] = $request->description[$key];
-                $course->items()->create($itemData);
+            if ($request->hasFile('image')) {
+                $item_image = InputHelper::upload($request->image, $this->file_path);
+            } else {
+                $item_image = "";
             }
-        }
-        DB::commit();
-        return redirect()->back()->with('success', 'Cousre Created Successfully');
+            if ($request->hasFile('class_routine')) {
+                $class_routine = InputHelper::upload($request->class_routine, $this->file_path);
+            } else {
+                $class_routine = "";
+            }
+            $course = Course::create([
+                'category_id' =>  $request->category_id,
+                'course_title' =>  $request->course_title,
+                'start_date'     => $request->start_date,
+                'image'          => $item_image,
+                'class_routine'  => $class_routine,
+                'video'     => $request->video,
+                'price'     => $request->price,
+                'discount_price'     => $request->discount_price,
+                'course_description' => $request->course_description,
+
+            ]);
+
+            if ($course) {
+                foreach ($request->subject as $key => $subjectName) {
+                    $subject = CourseSubject::create([
+                        'course_id' => $course->id,
+                        'subject_id' => $subjectName,
+                        'instructor_id' => $request->instructor[$key],
+                    ]);
+
+                    foreach ($request->chapter[$key] as $chapterName) {
+                        Chapter::create([
+                            'course_subject_id' => $subject->id,
+                            'chapter_name' => $chapterName,
+                        ]);
+                    }
+                }
+            }
+            DB::commit();
+            return redirect()->back()->with('success', 'Cousre Created Successfully');
         } catch (\Exception $e) {
             $error_message = $e->getMessage();
             return redirect()->route('courses.create')->with('error', $error_message);
@@ -141,8 +147,8 @@ class CourseController extends Controller
     public function destroy($id)
     {
         try {
-            $course= Course::find($id);
-            if($course->delete()){
+            $course = Course::find($id);
+            if ($course->delete()) {
                 $course->items()->delete();
             }
             return redirect()->route('courses.index')->with('success', 'Deleted successfully');

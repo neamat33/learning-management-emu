@@ -27,8 +27,8 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Bus\Batch;
-use Illuminate\Support\Facades\Route; 
-Route::get('/', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
+use Illuminate\Support\Facades\Route;
+
 //admin authentication system
 Route::group(['prefix' => 'admin'], function () {
     //admin authentication system
@@ -138,7 +138,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('subject_assign_edit/{branch_id}/{id}',[SubjectAssignController::class,'edit']);
         Route::put('subject_assign/update/{id}',[SubjectAssignController::class,'update']);
         Route::get('subject_assign/delete/{id}', [SubjectAssignController::class,'destroy'])->name('subject_assign.delete');
-        
+
         // Students
         Route::resource('students',StudentController::class);
         Route::get('get_section',[StudentController::class,'get_section']);
@@ -155,11 +155,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('instructors',InstructorController::class);
         Route::resource('courses',CourseController::class);
         Route::resource('categories',CategoryController::class);
-        
+
         // Accounts
         Route::resource('accounts',AccountController::class);
         Route::get('get_bank',[AccountController::class,'get_bank']);
-        
+
         // Transactions
         Route::resource('transactions',TransactionController::class);
         Route::get('expense-transaction',[TransactionController::class,'create_expense'])->name('create_transaction_exepense');
