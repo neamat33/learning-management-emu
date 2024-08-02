@@ -13,4 +13,11 @@ class Subject extends Model
     //     return $this->belongsTo(ExpenseCategory::class,'category_id','id');
     // }
 
+
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class,'course_subject_id','id');
+    }
+
+
 }

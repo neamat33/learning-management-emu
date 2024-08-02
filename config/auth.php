@@ -14,10 +14,9 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'admin',
+        'guard' => 'web',
         'passwords' => 'users',
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -44,9 +43,9 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'seller' => [
+        'student' => [
             'driver' => 'session',
-            'provider' => 'sellers',
+            'provider' => 'students',
         ],
     ],
 
@@ -76,10 +75,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin\Admin::class,
         ],
-        'sellers' => [
+        'students' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Seller\Seller::class,
+            'model' => App\Models\Student\Student::class,
         ],
+
 
     ],
 
@@ -111,8 +111,8 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'sellers' => [
-            'provider' => 'sellers',
+        'students' => [
+            'provider' => 'students',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

@@ -80,11 +80,11 @@ Page Banner START -->
                             <div class="bg-dark border rounded-3 pb-0 p-3 w-100">
                                 <!-- Dashboard menu -->
                                 <div class="list-group list-group-dark list-group-borderless">
-                                    <a class="list-group-item " href="<?php echo e(route('student.dashboard.page')); ?>"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
-                                    <a class="list-group-item" href="<?php echo e(route('student_course.list')); ?>"><i class="bi bi-basket fa-fw me-2"></i>My Courses</a>
-                                    <a class="list-group-item" href="<?php echo e(route('student_course.details')); ?>"><i class="far fa-fw fa-file-alt me-2"></i>Course Resume</a>
-                                    <a class="list-group-item active" href="<?php echo e(route('student_course.quiz')); ?>"><i class="bi bi-question-diamond fa-fw me-2"></i>Quiz</a>
-                                    <a class="list-group-item" href="<?php echo e(route('student_profile.update')); ?>"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>
+                                    <a class="list-group-item " href="<?php echo e(route('dashboard.page')); ?>"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
+                                    <a class="list-group-item" href="<?php echo e(route('course.list')); ?>"><i class="bi bi-basket fa-fw me-2"></i>My Courses</a>
+                                    <a class="list-group-item" href="<?php echo e(route('course.details')); ?>"><i class="far fa-fw fa-file-alt me-2"></i>Course Resume</a>
+                                    <a class="list-group-item active" href="<?php echo e(route('course.quiz')); ?>"><i class="bi bi-question-diamond fa-fw me-2"></i>Quiz</a>
+                                    <a class="list-group-item" href="<?php echo e(route('profile.update')); ?>"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>
                                     <a class="list-group-item text-danger bg-danger-soft-hover" href="#"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign Out</a>
                                 </div>
                             </div>

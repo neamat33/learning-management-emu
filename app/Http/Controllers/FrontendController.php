@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\CourseSubject;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -16,6 +17,7 @@ class FrontendController extends Controller
     }
     public function courseDetailsPage($id){
         $course = Course::findOrFail(decrypt($id));
-        return view('frontend.course_details',compact('course'));
+        $getInstructors = CourseSubject::where('course_id',$course->id)->with('instructor','subject','chapter')->get();
+        return view('frontend.course_details',compact('course','getInstructors'));
     }
 }

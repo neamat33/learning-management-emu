@@ -15,10 +15,9 @@ class CourseSubject extends Model
     public function instructor(){
         return $this->belongsTo(Instructor::class,'instructor_id','id');
     }
-    public function chapters()
-    {
-        return $this->hasMany(Chapter::class);
+    public function chapter(){
+        return $this->hasMany( Chapter::class,'course_subject_id','id');
     }
 
-  
+
 }

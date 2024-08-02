@@ -33,7 +33,7 @@
                         <a href="{{route('home.index')}}" class="btn btn-primary-soft" style="font-weight: bold;padding: 8px 20px">হোম</a>
                     </li>
                     <li class="nav-item" style="margin-left: 2px">
-                        <a href="{{route('course.page')}}" class="btn btn-primary-soft" style="font-weight: bold;padding: 8px 20px">কোর্সসমূহ</a>
+                        <a href="{{route('frontend.course.page')}}" class="btn btn-primary-soft" style="font-weight: bold;padding: 8px 20px">কোর্সসমূহ</a>
                     </li>
                     <li class="nav-item" style="margin-left: 2px">
                         <a class="btn btn-primary-soft" style="font-weight: bold;padding: 8px 20px">পরীক্ষাসমূহ</a>
@@ -94,8 +94,8 @@
                     </li>
                     <li> <hr class="dropdown-divider"></li>
                     <!-- Links -->
-                    <li><a class="dropdown-item" href="{{route('student.dashboard.page')}}"><i class="bi bi-grid-fill fa-fw me-1"></i>Dashboard</a></li>
-                    <li><a class="dropdown-item" href="{{route('student_profile.update')}}"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
+                    <li><a class="dropdown-item" href="{{route('dashboard.page')}}"><i class="bi bi-grid-fill fa-fw me-1"></i>Dashboard</a></li>
+                    <li><a class="dropdown-item" href="{{route('profile.update')}}"><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a></li>
 {{--                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Account Settings</a></li>--}}
 {{--                    <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help</a></li>--}}
                     <li><a class="dropdown-item bg-danger-soft-hover" href="#"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
