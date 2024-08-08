@@ -28,7 +28,8 @@ Route::group(['middleware' => ['auth:student', 'prevent-back-history']], functio
     Route::get('/course_list', [\App\Http\Controllers\StudentDashboardController::class, 'courseList'])->name('course.list');
     Route::get('/course_details', [\App\Http\Controllers\StudentDashboardController::class, 'courseDetails'])->name('course.details');
     Route::get('/quiz', [\App\Http\Controllers\StudentDashboardController::class, 'quiz'])->name('course.quiz');
-    Route::get('/profile_update', [\App\Http\Controllers\StudentDashboardController::class, 'updateProfile'])->name('profile.update');
+    Route::get('/my-profile', [\App\Http\Controllers\StudentDashboardController::class, 'showProfile'])->name('profile.update');
+    Route::post('/profile_update/{id}', [\App\Http\Controllers\StudentDashboardController::class, 'updateProfile'])->name('my.profile.update');
     Route::get('/image-download/{id}', [StudentDashboardController::class, 'downloadImage'])->name('download.image');
 
 });

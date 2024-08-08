@@ -6,10 +6,10 @@
             <!-- Widget 1 START -->
             <div class="col-lg-3">
                 <!-- logo -->
-                <a class="me-0" href="index-2.html">
+                <a class="me-0" href="<?php echo e(Url('/')); ?>">
                     <span class="light-mode-item h-40px">EMU Education</span>
                     <span class="dark-mode-item h-40px">EMU Education</span>
-                    <!--					<img class="light-mode-item h-40px" src="assets/images/logo.svg" alt="logo">-->
+                    <!--				<img class="light-mode-item h-40px" src="assets/images/logo.svg" alt="logo">-->
                     <!--					<img class="dark-mode-item h-40px" src="assets/images/logo-light.svg" alt="logo">-->
                 </a>
                 <p class="my-3">EMU-Education, built specifically for the education centers which is dedicated to teaching and involve learners.</p>
@@ -30,9 +30,8 @@
                     <div class="col-6 col-md-4">
                         <h5 class="mb-2 mb-md-4">Company</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item"><a class="nav-link" href="#">About us</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Contact us</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">News and Blogs</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo e(route('frontend.about.page')); ?>">About us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo e(route('frontend.contact.page')); ?>">Contact us</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Library</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Career</a></li>
                         </ul>
@@ -45,7 +44,6 @@
                             <li class="nav-item"><a class="nav-link" href="#">Documentation</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Faq</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Forum</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Sitemap</a></li>
                         </ul>
                     </div>
 

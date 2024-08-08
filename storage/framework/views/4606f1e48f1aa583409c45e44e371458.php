@@ -11,19 +11,33 @@ Page content START -->
                         <div class="row justify-content-center">
                             <div class="col-md-8 col-xl-12">
                                 <!-- Card START -->
-                                <div class="card shadow">
-                                    <!-- Image -->
-                                    <div class="rounded-3">
-                                        <img src="<?php echo e(asset($course->image)); ?>" style="height: 391px;width: 391px" class="card-img-top" alt="book image">
+                                <div class="card shadow shamimxp" style="position: relative;">
+                                    <div class="overflow-hidden rounded-3" style="padding: 10px">
+                                        <img  src="<?php echo e(asset($course->image)); ?>" class="card-img" alt="course image">
+                                        <!-- Overlay -->
+                                        <div class="bg-overlay opacity-6"></div>
+                                        <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                                            <!-- Video button and link -->
+                                            <div class="m-auto">
+                                                <?php if($course->video): ?>
+                                                    <a href="<?php echo e($course->video); ?>" class="btn btn-lg text-danger btn-round btn-white-shadow mb-0" data-glightbox="" data-gallery="course-video">
+                                                        <i class="fas fa-play"></i>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <a href="#" class="btn btn-lg text-danger btn-round btn-white-shadow mb-0">
+                                                        <i class="fas fa-play"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
                                     </div>
-
                                     <!-- Card body -->
                                     <div class="card-body pb-3">
                                         <!-- Buttons and price -->
                                         <div class="text-center">
                                             <!-- Buttons -->
                                             <a href="#" class="btn btn-success-soft mb-2 mb-sm-0 me-00 me-sm-3"><i class="bi bi-cart3 me-2"></i>প্রোগ্রামে ভর্তি হও</a>
-                                            <a href="#" class="btn btn-white-soft mb-0"><h4 class="text-success mb-0 item-show">৳ <?php echo e($course->price); ?> /-</h4></a>
+                                            <a href="#" class="btn btn-white-soft mb-0"><h4 class="text-success mb-0 item-show">৳ <?php echo e($course->price); ?></h4></a>
                                         </div>
                                     </div>
                                 </div>

@@ -14,7 +14,11 @@
                             <!-- Avatar -->
                             <div class="col-auto">
                                 <div class="avatar avatar-xxl position-relative mt-n3">
-                                    <img class="avatar-img rounded-circle border border-white border-3 shadow" src="https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg" alt="">
+                                    <?php if($userInfo->image): ?>
+                                        <img class="avatar-img rounded-circle border border-white border-3 shadow" src="<?php echo e(asset($userInfo->image)); ?>" alt="">
+                                    <?php else: ?>
+                                        <img class="avatar-img rounded-circle border border-white border-3 shadow" src="https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg" alt="">
+                                    <?php endif; ?>
                                     <span class="badge text-bg-success rounded-pill position-absolute top-50 start-100 translate-middle mt-4 mt-md-5 ms-n3 px-md-3">Pro</span>
                                 </div>
                             </div>
@@ -41,7 +45,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Advanced filter responsive toggler START -->
                     <!-- Divider -->
                     <hr class="d-xl-none">
@@ -58,13 +61,11 @@
     </section>
     <!-- =======================
     Page Banner END -->
-
     <!-- =======================
     Page content START -->
     <section class="pt-0"  style="background-color: #F5F7F9">
         <div class="container">
             <div class="row">
-
                 <!-- Left sidebar START -->
                 <div class="col-xl-3">
                     <!-- Responsive offcanvas body START -->
@@ -99,13 +100,13 @@
                     <div class="card  border rounded-3">
                         <!-- Card header -->
                         <div class="card-header bg-transparent border-bottom">
-                            <h3 class="card-header-title mb-0">Edit Profile</h3>
+                            <h3 class="card-header-title mb-0">My Profile</h3>
                         </div>
                         <!-- Card body START -->
                         <div class="card-body">
                             <!-- Form -->
-                            <form class="row g-4">
-
+                            <form class="row g-4" action="<?php echo e(route('my.profile.update',encrypt($userInfo->id))); ?>" method="post" enctype="multipart/form-data">
+                                <?php echo csrf_field(); ?>
                                 <!-- Profile picture -->
                                 <div class="col-12 justify-content-center align-items-center">
                                     <label class="form-label">Profile picture</label>
@@ -113,73 +114,65 @@
                                         <label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">
                                             <!-- Avatar place holder -->
                                             <span class="avatar avatar-xl">
-											<img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-white border-3 shadow" src="https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg" alt="">
+                                                <?php if($userInfo->image): ?>
+                                                    <img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-white border-3 shadow" src="<?php echo e(asset($userInfo->image)); ?>" alt="">
+                                                <?php else: ?>
+                                                    <img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-white border-3 shadow" src="https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg" alt="">
+                                                <?php endif; ?>
 										</span>
                                             <!-- Remove btn -->
                                             <button type="button" class="uploadremove"><i class="bi bi-x text-white"></i></button>
                                         </label>
                                         <!-- Upload button -->
                                         <label class="btn btn-primary-soft mb-0" for="uploadfile-1">Change</label>
-                                        <input id="uploadfile-1" class="form-control d-none" type="file">
+                                        <input id="uploadfile-1" name="image" class="form-control d-none" type="file" onchange="loadFile(event)">
                                     </div>
                                 </div>
-
                                 <!-- Full name -->
                                 <div class="col-12">
                                     <label class="form-label">Full name</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" value="" placeholder="First name">
+                                        <input type="text" class="form-control" name="name" value="<?php echo e($userInfo->name ?? '-'); ?>" placeholder="First name">
                                     </div>
                                 </div>
-
                                 <!-- Email id -->
                                 <div class="col-md-6">
-                                    <label class="form-label">Email id</label>
-                                    <input class="form-control" type="email" value=""  placeholder="Email">
+                                    <label class="form-label">Email Address</label>
+                                    <input class="form-control" type="email" value="<?php echo e($userInfo->email ?? '-'); ?>"  placeholder="Email Address" disabled>
                                 </div>
-
                                 <!-- Phone number -->
                                 <div class="col-md-6">
                                     <label class="form-label">Phone number</label>
-                                    <input type="text" class="form-control" value="" placeholder="Phone number">
+                                    <input type="text" class="form-control" value="<?php echo e($userInfo->phone_number ?? '-'); ?>" placeholder="Phone number" disabled>
                                 </div>
-
-                                <!-- Phone number -->
-                                <div class="col-md-6">
-                                    <label class="form-label">Father Phone number</label>
-                                    <input type="text" class="form-control" value="" placeholder="Phone number">
-                                </div>
-
-
                                 <!-- Location -->
                                 <div class="col-md-6">
-                                    <label class="form-label">Location</label>
-                                    <input class="form-control" type="text" placeholder="location" value="">
+                                    <label class="form-label">Address</label>
+                                    <input class="form-control" type="text" name="address" placeholder="address" value="<?php echo e($userInfo->address ?? '-'); ?>">
                                 </div>
-
+                                <div class="col-md-6">
+                                    <label class="form-label">Date of Birth</label>
+                                    <input class="form-control" type="date" name="dob" placeholder="address" value="<?php echo e($userInfo->dob ?? '-'); ?>">
+                                </div>
                                 <!-- About me -->
                                 <div class="col-12">
                                     <label class="form-label">About me</label>
-                                    <textarea class="form-control" rows="3" placeholder="about me"></textarea>
+                                    <textarea class="form-control" rows="3" name="about_me" placeholder="about me"><?php echo e($userInfo->about_me ?? '-'); ?></textarea>
                                 </div>
-
                                 <!-- Education -->
                                 <div class="col-12">
                                     <label class="form-label">Education</label>
-                                    <input class="form-control mb-2" type="text" placeholder="education" value="">
+                                    <input class="form-control mb-2" type="text" name="education" placeholder="education" value="<?php echo e($userInfo->education ?? '-'); ?>">
                                 </div>
-
                                 <!-- Save button -->
                                 <div class="d-sm-flex justify-content-end">
-                                    <button type="button" class="btn btn-primary mb-0">Save changes</button>
+                                    <button type="submit" class="btn btn-primary mb-0">Save changes</button>
                                 </div>
                             </form>
                         </div>
                         <!-- Card body END -->
                     </div>
                     <!-- Edit profile END -->
-
-
                 </div>
                 <!-- Main content END -->
             </div><!-- Row END -->

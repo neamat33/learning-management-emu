@@ -15,7 +15,11 @@ Page Banner START -->
                             <!-- Avatar -->
                             <div class="col-auto">
                                 <div class="avatar avatar-xxl position-relative mt-n3">
-                                    <img class="avatar-img rounded-circle border border-white border-3 shadow" src="https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg" alt="">
+                                    @if($userInfo->image)
+                                        <img class="avatar-img rounded-circle border border-white border-3 shadow" src="{{asset($userInfo->image)}}" alt="">
+                                    @else
+                                        <img class="avatar-img rounded-circle border border-white border-3 shadow" src="https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg" alt="">
+                                    @endif
                                     <span class="badge text-bg-success rounded-pill position-absolute top-50 start-100 translate-middle mt-4 mt-md-5 ms-n3 px-md-3">Pro</span>
                                 </div>
                             </div>

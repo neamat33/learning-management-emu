@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\InputHelper;
 use App\Models\Course;
-use http\Url;
+use App\Models\Student\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Crypt;
 
 class StudentDashboardController extends Controller
 {
+    private $file_path;
+    public function __construct()
+    {
+        $this->file_path = 'profile/';
+    }
+
     public function dashboard(){
         return view('frontend.student.dashboard');
     }
@@ -23,8 +28,27 @@ class StudentDashboardController extends Controller
     public function quiz(){
         return view('frontend.student.quiz');
     }
-    public function updateProfile(){
-        return view('frontend.student.profile_edit');
+
+    public function showProfile(){
+        $userInfo = Student::where('id',auth('student')->user()->id)->first();
+        return view('frontend.student.profile_edit',compact('userInfo'));
+    }
+
+    public function updateProfile(Request $request,$id){
+        $userInfo = Student::findOrFail(decrypt($id));
+        $userInfo->name = $request->name;
+        $userInfo->about_me = $request->about_me;
+        $userInfo->dob = $request->dob;
+        $userInfo->education = $request->education;
+        $userInfo->address = $request->address;
+        if ($request->hasFile('image')) {
+            $profile_image = InputHelper::upload($request->image, $this->file_path);
+        } else {
+            $profile_image = "";
+        }
+        $userInfo->image = $profile_image;
+        $userInfo->save();
+        return back();
     }
 
 //    public function downloadImage($id){
@@ -37,18 +61,11 @@ class StudentDashboardController extends Controller
 
     public function downloadImage($id)
     {
-        // Decrypt the ID and find the course
         $course = Course::select('class_routine')->findOrFail(decrypt($id));
-
-        // Get the image path
         $imagePath = public_path($course->class_routine);
-
-        // Check if the file exists
         if (file_exists($imagePath)) {
-            // Return the file download response
             return response()->download($imagePath);
         } else {
-            // Return a 404 error if the file does not exist
             return response()->json(['error' => 'File not found'], 404);
         }
     }

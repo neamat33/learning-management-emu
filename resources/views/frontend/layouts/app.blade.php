@@ -20,8 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('web')}}/assets/vendor/choices/css/choices.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('web')}}/assets/vendor/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="{{asset('web')}}/assets/vendor/stepper/css/bs-stepper.min.css">
-
-    <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="{{asset('web')}}/assets/vendor/glightbox/css/glightbox.css">
     <link id="style-switch" rel="stylesheet" type="text/css" href="{{asset('web')}}/assets/css/style.css">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -64,11 +63,22 @@ Footer END -->
 <script src="{{asset('web')}}/assets/vendor/tiny-slider/tiny-slider.js"></script>
 <script src="{{asset('web')}}/assets/vendor/glightbox/js/glightbox.js"></script>
 <script src="{{asset('web')}}/assets/vendor/purecounterjs/dist/purecounter_vanilla.js"></script>
-<script src="{{asset('web')}}/assets/vendor/choices/js/choices.min.js"></script>
 <script src="{{asset('web')}}/assets/vendor/aos/aos.js"></script>
 <script src="{{asset('web')}}/assets/vendor/stepper/js/bs-stepper.min.js"></script>
 <!-- Template Functions -->
+<script src="{{asset('web/assets/vendor/sticky-js/sticky.min.js')}}"></script>
+<script src="{{asset('web')}}/assets/vendor/choices/js/choices.min.js"></script>
 <script src="{{asset('web')}}/assets/js/functions.js"></script>
+
+<script>
+    var loadFile = function(event) {
+        var output = document.getElementById('uploadfile-1-preview');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+</script>
 
 </body>
 

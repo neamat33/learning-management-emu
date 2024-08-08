@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->text('image')->nullable();
             $table->date('dob')->nullable();
+            $table->text('about_me')->nullable();
+            $table->text('address')->nullable();
+            $table->text('education')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

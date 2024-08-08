@@ -2,6 +2,13 @@
 /public/build
 /public/hot
 /public/storage
+/public/course
+/public/student
+/public/instructor
+/storage/*.key
+/storage/fremwork/cache
+/storage/fremwork/sessions
+/storage/fremwork/views
 /storage/*.key
 /vendor
 .env

@@ -1005,7 +1005,7 @@ var e = {
           if(dir == 'rtl') {
               style.setAttribute('href', 'web/assets/css/style-rtl.css');
           } else {
-              style.setAttribute('href', 'web/assets/css/style.css');
+              style.setAttribute('href', '/web/assets/css/style.css');
           }
 
           localStorage.setItem("data-theme", 'light') // save theme to local storage

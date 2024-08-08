@@ -22809,3 +22809,19 @@ html[dir=rtl] .choices__input {
 
 /*User CSS*/
 /*# sourceMappingURL=style.css.map */
+<style>
+ .play-button svg{
+     color: red;
+ }
+.play-button svg:hover{
+    color: #5d0a0a;
+    cursor: pointer;
+}
+.rounded-3 img{
+    opacity: 0.6;
+}
+.rounded-3 img:hover{
+    opacity: 1.0;
+    cursor: pointer;
+}
+</style>

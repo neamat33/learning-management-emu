@@ -12,12 +12,18 @@ class FrontendController extends Controller
         return view('frontend.index');
     }
     public function coursePage(){
-         $allCourses = Course::where('status',1)->get();
+         $allCourses = Course::where('status',1)->paginate(16);
         return view('frontend.courses',compact('allCourses'));
     }
     public function courseDetailsPage($id){
         $course = Course::findOrFail(decrypt($id));
         $getInstructors = CourseSubject::where('course_id',$course->id)->with('instructor','subject','chapter')->get();
         return view('frontend.course_details',compact('course','getInstructors'));
+    }
+    public function aboutUs(){
+        return view('frontend.about_us');
+    }
+    public function contactUs(){
+        return view('frontend.contact_us');
     }
 }

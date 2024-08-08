@@ -91,7 +91,6 @@
 
                     </div>
                     <!-- Search option END -->
-
                     <!-- Book Grid START -->
                     <div class="row g-4">
                         @foreach($allCourses as $course)
@@ -135,17 +134,27 @@
                         @endforeach
                     </div>
                     <!-- Book Grid END -->
-
                     <!-- Pagination START -->
                     <div class="col-12">
                         <nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
                             <ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                                <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-double-left"></i></a></li>
-                                <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item mb-0"><a class="page-link" href="#">..</a></li>
-                                <li class="page-item mb-0"><a class="page-link" href="#">6</a></li>
-                                <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>
+                                @if ($allCourses->onFirstPage())
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-double-left"></i></a></li>
+                                @else
+                                    <li class="page-item mb-0"><a class="page-link" href="{{ $allCourses->previousPageUrl() }}" tabindex="-1"><i class="fas fa-angle-double-left"></i></a></li>
+                                @endif
+                                @for ($page = 1; $page <= $allCourses->lastPage(); $page++)
+                                    @if ($page == $allCourses->currentPage())
+                                        <li class="page-item mb-0 active"><a class="page-link" href="#">{{ $page }}</a></li>
+                                    @else
+                                        <li class="page-item mb-0"><a class="page-link" href="{{ $allCourses->url($page) }}">{{ $page }}</a></li>
+                                    @endif
+                                @endfor
+                                @if ($allCourses->hasMorePages())
+                                    <li class="page-item mb-0"><a class="page-link" href="{{ $allCourses->nextPageUrl() }}"><i class="fas fa-angle-double-right"></i></a></li>
+                                @else
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>
+                                @endif
                             </ul>
                         </nav>
                     </div>
