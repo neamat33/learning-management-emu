@@ -170,5 +170,9 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('setting',[SettingController::class, 'setting'])->name('setting');
         Route::post('setting/update',[SettingController::class, 'update_setting'])->name('update_setting');
+
+        Route::get('/contact/message',[\App\Http\Controllers\FrontendController::class, 'contactMessage'])->name('contact.index');
+        Route::get('/contact/message/delete/{id}',[\App\Http\Controllers\FrontendController::class, 'messageDelete'])->name('message.delete');
+
     });
 });

@@ -306,7 +306,6 @@ Page Banner START -->
                         <h2 class="mb-0">Meet Our Team</h2>
                         <a href="<?php echo e(route('frontend.contact.page')); ?>" class="btn btn-light mt-2">Join Team</a>
                     </div>
-
                     <!-- Slider START -->
                     <div class="tiny-slider arrow-round arrow-creative arrow-blur arrow-hover mt-2 mt-sm-5">
                         <div class="tiny-slider-inner" data-autoplay="true" data-arrow="true" data-dots="false" data-items="4" data-items-lg="3" data-items-md="2">
@@ -315,7 +314,11 @@ Page Banner START -->
                             <div class="text-center">
                                 <!-- Avatar -->
                                 <div class="avatar avatar-xxl mb-3">
-                                    <img class="avatar-img rounded-circle" src="<?php echo e(asset($instructor->photo)); ?>" alt="avatar">
+                                    <?php if($instructor->photo): ?>
+                                        <img class="avatar-img rounded-circle" src="<?php echo e(asset($instructor->photo)); ?>" alt="avatar">
+                                    <?php else: ?>
+                                        <img class="avatar-img rounded-circle" src="https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg" alt="avatar">
+                                    <?php endif; ?>
                                 </div>
                                 <!-- Info -->
                                 <h6 class="mb-0"><a href="#"><?php echo e($instructor->name); ?></a></h6>

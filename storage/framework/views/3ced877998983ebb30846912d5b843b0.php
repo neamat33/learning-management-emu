@@ -65,7 +65,7 @@
                 <h5 class="mb-2 mb-md-4">Contact</h5>
                 <!-- Time -->
                 <p class="mb-2">
-                    Toll free:<span class="h6 fw-light ms-2">+1234 568 963</span>
+                    Toll free:<span class="h6 fw-light ms-2">+880 1710 000000</span>
                     <span class="d-block small">(9:AM to 8:PM IST)</span>
                 </p>
 

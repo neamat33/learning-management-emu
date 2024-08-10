@@ -11,7 +11,6 @@ Page Banner START -->
                     <h1 class="mb-4">We're here to help!</h1>
                 </div>
             </div>
-
             <!-- Contact info box -->
             <div class="row g-4 g-md-5 mt-0 mt-lg-3">
                 <!-- Box item -->
@@ -26,11 +25,11 @@ Page Banner START -->
                             </li>
                             <!-- Phone number -->
                             <li class="list-item mb-3">
-                                <a href="#" class="text-white"> <i class="fas fa-fw fa-phone-alt me-2"></i>(423) 733-8222 </a>
+                                <a href="#" class="text-white"> <i class="fas fa-fw fa-phone-alt me-2"></i>01745-454545 </a>
                             </li>
                             <!-- Email id -->
                             <li class="list-item mb-0">
-                                <a href="#" class="text-white"> <i class="far fa-fw fa-envelope me-2"></i>example@email.com </a>
+                                <a href="#" class="text-white"> <i class="far fa-fw fa-envelope me-2"></i>info@emubd.com </a>
                             </li>
                         </ul>
                     </div>
@@ -40,7 +39,7 @@ Page Banner START -->
                 <div class="col-lg-4 mt-lg-0">
                     <div class="card card-body shadow py-5 text-center h-100">
                         <!-- Title -->
-                        <h5 class="mb-3">Contact Address</h5>
+                        <h5 class="mb-3">HotLine Contact</h5>
                         <ul class="list-inline mb-0">
                             <!-- Address -->
                             <li class="list-item mb-3 h6 fw-light">
@@ -48,11 +47,11 @@ Page Banner START -->
                             </li>
                             <!-- Phone number -->
                             <li class="list-item mb-3 h6 fw-light">
-                                <a href="#"> <i class="fas fa-fw fa-phone-alt me-2"></i>+896-789-546 </a>
+                                <a href="#"> <i class="fas fa-fw fa-phone-alt me-2"></i>01925-845623</a>
                             </li>
                             <!-- Email id -->
                             <li class="list-item mb-0 h6 fw-light">
-                                <a href="#"> <i class="far fa-fw fa-envelope me-2"></i>example@email.com </a>
+                                <a href="#"> <i class="far fa-fw fa-envelope me-2"></i>info@emubd.com</a>
                             </li>
                         </ul>
                     </div>
@@ -62,7 +61,7 @@ Page Banner START -->
                 <div class="col-lg-4 mt-lg-0">
                     <div class="card card-body shadow py-5 text-center h-100">
                         <!-- Title -->
-                        <h5 class="mb-3">Main Office Address</h5>
+                        <h5 class="mb-3">Main Office Contact</h5>
                         <ul class="list-inline mb-0">
                             <!-- Address -->
                             <li class="list-item mb-3 h6 fw-light">
@@ -70,11 +69,11 @@ Page Banner START -->
                             </li>
                             <!-- Phone number -->
                             <li class="list-item mb-3 h6 fw-light">
-                                <a href="#"> <i class="fas fa-fw fa-phone-alt me-2"></i>(678) 324-1251 </a>
+                                <a href="#"> <i class="fas fa-fw fa-phone-alt me-2"></i>01631-025895</a>
                             </li>
                             <!-- Email id -->
                             <li class="list-item mb-0 h6 fw-light">
-                                <a href="#"> <i class="far fa-fw fa-envelope me-2"></i>example@email.com </a>
+                                <a href="#"> <i class="far fa-fw fa-envelope me-2"></i>info@emubd.com</a>
                             </li>
                         </ul>
                     </div>
@@ -114,26 +113,30 @@ Page Banner START -->
                     <!-- Title -->
                     <h2 class="mt-4 mt-md-0">Let's talk</h2>
                     <p>To request a quote or want to meet up for coffee, contact us directly or fill out the form and we will get back to you promptly</p>
-
-                    <form>
+                    <form action="{{route('contact.message.store')}}" method="post">
+                        @csrf
                         <!-- Name -->
                         <div class="mb-4 bg-light-input">
                             <label for="yourName" class="form-label">Your name *</label>
-                            <input type="text" class="form-control form-control-lg" id="yourName">
+                            <input type="text" class="form-control form-control-lg" name="name" id="yourName">
+                        </div>
+                        <div class="mb-4 bg-light-input">
+                            <label for="phone_number" class="form-label">Phone Number *</label>
+                            <input type="number" class="form-control form-control-lg" name="phone_number" id="phone_number">
                         </div>
                         <!-- Email -->
                         <div class="mb-4 bg-light-input">
                             <label for="emailInput" class="form-label">Email address *</label>
-                            <input type="email" class="form-control form-control-lg" id="emailInput">
+                            <input type="email" class="form-control form-control-lg" name="email" id="emailInput">
                         </div>
                         <!-- Message -->
                         <div class="mb-4 bg-light-input">
                             <label for="textareaBox" class="form-label">Message *</label>
-                            <textarea class="form-control" id="textareaBox" rows="4"></textarea>
+                            <textarea class="form-control" id="textareaBox" name="message" rows="4"></textarea>
                         </div>
                         <!-- Button -->
                         <div class="d-grid">
-                            <button class="btn btn-lg btn-primary mb-0" type="button">Send Message</button>
+                            <button class="btn btn-lg btn-primary mb-0" type="submit">Send Message</button>
                         </div>
                     </form>
                 </div>

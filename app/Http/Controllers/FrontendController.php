@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Course;
 use App\Models\CourseSubject;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Concat;
 
 class FrontendController extends Controller
 {
@@ -30,5 +32,22 @@ class FrontendController extends Controller
     }
     public function contactUs(){
         return view('frontend.contact_us');
+    }
+
+    public function contactStore(Request $request){
+           $data = new Contact();
+           $data->fill($request->all());
+           $data->save();
+           return back();
+    }
+
+    public function contactMessage(){
+        $contactMessage = Contact::latest()->paginate(20);
+        return view('admin.contact.index',compact('contactMessage'));
+    }
+    public function messageDelete($id){
+        $data = Contact::findOrFail($id);
+        $data->delete();
+        return redirect()->back()->with('success', 'Data Delete Successfully!');
     }
 }

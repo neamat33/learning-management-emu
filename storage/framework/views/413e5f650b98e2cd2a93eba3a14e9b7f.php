@@ -53,7 +53,7 @@
                 </a>
 
                 <ul class="menu-sub">
-                   
+
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('list-course')): ?>
                         <li class="menu-item">
                             <a href="<?php echo e(route('courses.index')); ?>" class="menu-link">
@@ -258,6 +258,11 @@
                 </a>
             </li>
         <?php endif; ?>
+        <li class="menu-item">
+            <a href="<?php echo e(route('contact.index')); ?>" class="menu-link">
+                <div data-i18n="Contact Message">Contact Message</div>
+            </a>
+        </li>
     </ul>
 </aside>
 <?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/admin/layouts/sidebar.blade.php ENDPATH**/ ?>

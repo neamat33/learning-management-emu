@@ -22,7 +22,7 @@ class InstructorController extends Controller
         if($request->mobile){
             $instructor->where('name',$request->mobile);
         }
-        $instructors = $instructor->where('status_id',1)->where('branch_id', $branch_id)->paginate(20);
+        $instructors = $instructor->where('status',1)->where('branch_id', $branch_id)->paginate(20);
 
         return view('admin.instructor.list',compact('instructors'));
     }

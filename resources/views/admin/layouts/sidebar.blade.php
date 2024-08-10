@@ -53,7 +53,7 @@
                 </a>
 
                 <ul class="menu-sub">
-                   
+
                     @can('list-course')
                         <li class="menu-item">
                             <a href="{{ route('courses.index') }}" class="menu-link">
@@ -258,5 +258,10 @@
                 </a>
             </li>
         @endcan
+        <li class="menu-item">
+            <a href="{{ route('contact.index') }}" class="menu-link">
+                <div data-i18n="Contact Message">Contact Message</div>
+            </a>
+        </li>
     </ul>
 </aside>
