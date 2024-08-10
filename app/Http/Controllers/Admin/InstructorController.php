@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class InstructorController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $branch_id = session('branch_id');
@@ -23,7 +23,7 @@ class InstructorController extends Controller
             $instructor->where('name',$request->mobile);
         }
         $instructors = $instructor->where('status_id',1)->where('branch_id', $branch_id)->paginate(20);
-        
+
         return view('admin.instructor.list',compact('instructors'));
     }
 
@@ -37,22 +37,15 @@ class InstructorController extends Controller
 
     public function store(Request $request)
     {
-       
         $validated = $request->validate([
             'name' => 'required|max:128',
             'mobile' => "required|numeric|min:11|unique:instructors",
-            
         ]);
-        
         //try {
             DB::beginTransaction();
             $data = $request->all();
             $instructor = Instructor::create($data);
-
             if($instructor){
-                
-                // save image
-               
                 if (!empty($img = $request->file('photo'))) {
                     $name = $img->getClientOriginalName();
                     $ext = pathinfo($name, PATHINFO_EXTENSION);
@@ -72,14 +65,14 @@ class InstructorController extends Controller
     }
 
     public function edit($id)
-    { 
+    {
         $branch = (new BranchService)->get();
         $class = (new ClassService)->get();
         $shift = (new ShiftService)->get();
         $batch = (new BatchService)->get();
         $section = (new SectionService)->get();
 
-        if(session('role_id')==1){ 
+        if(session('role_id')==1){
             $data['branches'] = $branch->get();
             $data['classes'] = $class->get();
             $data['batches'] = $batch->get();
@@ -103,10 +96,10 @@ class InstructorController extends Controller
         $data = $request->all();
         try {
             $this->StudentService->update($data, $id);
-            
-            $this->StudentService->classAssignmentUpdate($data,$id); 
-            
-            return redirect()->route('students.index')->with('success', 'Student Update Successfully'); 
+
+            $this->StudentService->classAssignmentUpdate($data,$id);
+
+            return redirect()->route('students.index')->with('success', 'Student Update Successfully');
         } catch (\Exception $e) {
             $error_message = $e->getMessage();
             return back()->with('error', $error_message);
@@ -129,7 +122,7 @@ class InstructorController extends Controller
        $branch_id = $_GET['branch_id'];
 
       return $this->StudentService->getSection($branch_id,$class_id);
-       
+
     }
 
     public function get_student_info(Request $request){

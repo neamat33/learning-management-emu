@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Student\Auth\LoginController as StudentLoginController;
 use App\Http\Controllers\StudentDashboardController;
 use Illuminate\Support\Facades\Route;
@@ -9,8 +10,9 @@ use Illuminate\Support\Facades\Route;
 //Route::post('register', [RegisterController::class, 'register']);
 //Route::get('login', [EmployeeLoginController::class, 'showLoginForm'])->name('login');
 //Route::post('login', [EmployeeLoginController::class, 'login']);
-//Route::post('logout', [EmployeeLoginController::class, 'logout'])->name('logout');
 
+Route::get('register', [StudentLoginController::class, 'showRegistrationForm'])->name('student_register_page');
+Route::post('register', [RegisterController::class, 'register'])->name('student_register');
 Route::get('login', [StudentLoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [StudentLoginController::class, 'login']);
 Route::post('logout', [StudentLoginController::class, 'logout'])->name('student.logout');

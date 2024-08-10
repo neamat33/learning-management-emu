@@ -1,17 +1,16 @@
-@extends('frontend.layouts.app')
-@section('content')
+<?php $__env->startSection('content'); ?>
     <!-- =======================
 Page Banner START -->
     <section class="pt-0"  style="background-color: #F5F7F9">
         <div class="container-fluid px-0">
-            <div class="card bg-blue h-100px h-md-200px rounded-0" style="background:url({{asset('web')}}/assets/images/pattern/04.png) no-repeat center center; background-size:cover;">
+            <div class="card bg-blue h-100px h-md-200px rounded-0" style="background:url(<?php echo e(asset('web')); ?>/assets/images/pattern/04.png) no-repeat center center; background-size:cover;">
             </div>
         </div>
         <div class="container mt-n4">
             <div class="row">
                 <div class="col-12">
                     <div class="card bg-transparent card-body pb-0 px-0 mt-2 mt-sm-0">
-                        @include('frontend.student.comon')
+                        <?php echo $__env->make('frontend.student.comon', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
                     <!-- Divider -->
                     <hr class="d-xl-none">
@@ -49,14 +48,14 @@ Page Banner START -->
                             <div class="bg-dark border rounded-3 pb-0 p-3 w-100">
                                 <!-- Dashboard menu -->
                                 <div class="list-group list-group-dark list-group-borderless">
-                                    <a class="list-group-item " href="{{route('dashboard.page')}}"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
-                                    <a class="list-group-item" href="{{route('course.list')}}"><i class="bi bi-basket fa-fw me-2"></i>My Courses</a>
-                                    <a class="list-group-item" href="{{route('course.details')}}"><i class="far fa-fw fa-file-alt me-2"></i>Course Resume</a>
-                                    <a class="list-group-item active" href="{{route('course.quiz')}}"><i class="bi bi-question-diamond fa-fw me-2"></i>Quiz</a>
-                                    <a class="list-group-item" href="{{route('profile.update')}}"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>
-                                    <a class="list-group-item text-danger bg-danger-soft-hover" href="{{route('student.logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign Out</a>
-                                    <form id="logout-form" action="{{ route('student.logout') }}" method="POST" class="d-none">
-                                        @csrf
+                                    <a class="list-group-item " href="<?php echo e(route('dashboard.page')); ?>"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
+                                    <a class="list-group-item" href="<?php echo e(route('course.list')); ?>"><i class="bi bi-basket fa-fw me-2"></i>My Courses</a>
+                                    <a class="list-group-item" href="<?php echo e(route('course.details')); ?>"><i class="far fa-fw fa-file-alt me-2"></i>Course Resume</a>
+                                    <a class="list-group-item active" href="<?php echo e(route('course.quiz')); ?>"><i class="bi bi-question-diamond fa-fw me-2"></i>Quiz</a>
+                                    <a class="list-group-item" href="<?php echo e(route('profile.update')); ?>"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>
+                                    <a class="list-group-item text-danger bg-danger-soft-hover" href="<?php echo e(route('student.logout')); ?>" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign Out</a>
+                                    <form id="logout-form" action="<?php echo e(route('student.logout')); ?>" method="POST" class="d-none">
+                                        <?php echo csrf_field(); ?>
                                     </form>
                                 </div>
                             </div>
@@ -79,7 +78,7 @@ Page Banner START -->
                                     <div class="card">
                                         <div class="row g-0">
                                             <div class="col-md-2">
-                                                <img src="{{asset('web')}}/assets/images/courses/4by3/01.jpg" class="rounded-2" alt="Card image">
+                                                <img src="<?php echo e(asset('web')); ?>/assets/images/courses/4by3/01.jpg" class="rounded-2" alt="Card image">
                                             </div>
                                             <div class="col-md-10">
                                                 <div class="card-body">
@@ -318,4 +317,6 @@ Page Banner START -->
     </section>
     <!-- =======================
     Page content END -->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('frontend.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/frontend/student/quiz.blade.php ENDPATH**/ ?>

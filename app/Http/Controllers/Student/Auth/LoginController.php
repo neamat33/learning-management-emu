@@ -48,7 +48,7 @@ class LoginController extends Controller
         session()->forget('loggedIn-from-admin');
     }
 
-    public function showRegisterForm()
+    public function showRegistrationForm()
     {
         return view('frontend.auth.registration');
     }
@@ -83,7 +83,7 @@ class LoginController extends Controller
             return $response;
         }*/
 
-        return redirect()->route('student.login');
+        return redirect()->route('login');
     }
 
     /**

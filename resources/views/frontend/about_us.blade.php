@@ -34,7 +34,7 @@ Page Banner START -->
                     </figure>
 
                     <!-- Title -->
-                    <h1 class="position-relative fs-2">Eduport education theme, built specifically for the education centers which is dedicated to teaching and involve learners.</h1>
+                    <h1 class="position-relative fs-2">EMUBD education theme, built specifically for the education centers which is dedicated to teaching and involve learners.</h1>
                 </div>
                 <!-- Title and SVG END -->
             </div>
@@ -98,7 +98,7 @@ Page Banner START -->
             <!-- Title -->
             <div class="row mb-4">
                 <div class="col-lg-8">
-                    <h2>About Eduport Portal</h2>
+                    <h2>About EMUBD Portal</h2>
                     <p class="mb-0">How promotion excellent curiosity yet attempted happiness Gay prosperous impression had conviction For every delay death ask to style Me mean able my by in they Extremity now strangers contained.</p>
                 </div>
             </div>
@@ -258,83 +258,6 @@ Page Banner START -->
     About founder END -->
 
     <!-- =======================
-    Client START -->
-    <section class="bg-light">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/microsoft.svg" alt="">
-                    </div>
-                </div>
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/linkedin.svg" alt="">
-                    </div>
-                </div>
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/netflix.svg" alt="">
-                    </div>
-                </div>
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/coca-cola.svg" alt="">
-                    </div>
-                </div>
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/envato.svg" alt="">
-                    </div>
-                </div>
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/android.svg" alt="">
-                    </div>
-                </div>
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/coca-cola.svg" alt="">
-                    </div>
-                </div>
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/shippable.svg" alt="">
-                    </div>
-                </div>
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/algolia.svg" alt="">
-                    </div>
-                </div>
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/importio.svg" alt="">
-                    </div>
-                </div>
-                <!-- Logo item -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <div class="p-4 grayscale text-center">
-                        <img src="{{'web'}}/assets/images/client/yamaha.svg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- =======================
-    Client END -->
-
-    <!-- =======================
     Award and Team START -->
     <section>
         <div class="container">
@@ -382,107 +305,28 @@ Page Banner START -->
                     <!-- Title and button -->
                     <div class="d-sm-flex justify-content-sm-between">
                         <h2 class="mb-0">Meet Our Team</h2>
-                        <a href="#" class="btn btn-light mt-2">Join Team</a>
+                        <a href="{{route('frontend.contact.page')}}" class="btn btn-light mt-2">Join Team</a>
                     </div>
-
                     <!-- Slider START -->
                     <div class="tiny-slider arrow-round arrow-creative arrow-blur arrow-hover mt-2 mt-sm-5">
                         <div class="tiny-slider-inner" data-autoplay="true" data-arrow="true" data-dots="false" data-items="4" data-items-lg="3" data-items-md="2">
-
                             <!-- Avatar item -->
+                            @foreach($instructors as $instructor)
                             <div class="text-center">
                                 <!-- Avatar -->
                                 <div class="avatar avatar-xxl mb-3">
-                                    <img class="avatar-img rounded-circle" src="{{'web'}}/assets/images/avatar/01.jpg" alt="avatar">
+                                    @if($instructor->photo)
+                                        <img class="avatar-img rounded-circle" src="{{asset($instructor->photo)}}" alt="avatar">
+                                    @else
+                                        <img class="avatar-img rounded-circle" src="https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg" alt="avatar">
+                                    @endif
                                 </div>
                                 <!-- Info -->
-                                <h6 class="mb-0"><a href="#">Carolyn Ortiz</a></h6>
-                                <p class="mb-0 small">Designer</p>
+                                <h6 class="mb-0"><a href="#">{{$instructor->name}}</a></h6>
+                                <p class="mb-0 small">{{$instructor->subject->subject_name}}</p>
                                 <!-- Rating -->
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                </ul>
                             </div>
-
-                            <!-- Avatar item -->
-                            <div class="text-center">
-                                <!-- Avatar -->
-                                <div class="avatar avatar-xxl mb-3">
-                                    <img class="avatar-img rounded-circle" src="{{'web'}}/assets/images/avatar/02.jpg" alt="avatar">
-                                </div>
-                                <!-- Info -->
-                                <h6 class="mb-0"><a href="#">Dennis Barrett</a></h6>
-                                <p class="mb-0 small">IT professor</p>
-                                <!-- Rating -->
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                </ul>
-                            </div>
-
-                            <!-- Avatar item -->
-                            <div class="text-center">
-                                <!-- Avatar -->
-                                <div class="avatar avatar-xxl mb-3">
-                                    <img class="avatar-img rounded-circle" src="{{'web'}}/assets/images/avatar/09.jpg" alt="avatar">
-                                </div>
-                                <!-- Info -->
-                                <h6 class="mb-0"><a href="#">Frances Guerrero</a></h6>
-                                <p class="mb-0 small">Developer</p>
-                                <!-- Rating -->
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                </ul>
-                            </div>
-
-                            <!-- Avatar item -->
-                            <div class="text-center">
-                                <!-- Avatar -->
-                                <div class="avatar avatar-xxl mb-3">
-                                    <img class="avatar-img rounded-circle" src="{{'web'}}/assets/images/avatar/04.jpg" alt="avatar">
-                                </div>
-                                <!-- Info -->
-                                <h6 class="mb-0"><a href="#">Larry Lawson</a></h6>
-                                <p class="mb-0 small">Designer</p>
-                                <!-- Rating -->
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                </ul>
-                            </div>
-
-                            <!-- Avatar item -->
-                            <div class="text-center">
-                                <!-- Avatar -->
-                                <div class="avatar avatar-xxl mb-3">
-                                    <img class="avatar-img rounded-circle" src="{{'web'}}/assets/images/avatar/10.jpg" alt="avatar">
-                                </div>
-                                <!-- Info -->
-                                <h6 class="mb-0"><a href="#">Louis Crawford</a></h6>
-                                <p class="mb-0 small">Medical Professor</p>
-                                <!-- Rating -->
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                    <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                </ul>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- Slider END -->

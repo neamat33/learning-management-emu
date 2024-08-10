@@ -47,7 +47,7 @@ class StudentDashboardController extends Controller
             $profile_image = "";
         }
         $userInfo->image = $profile_image;
-        $userInfo->save();
+        $userInfo->update($request->except(['token', 'image']));
         return back();
     }
 

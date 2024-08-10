@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\CourseSubject;
+use App\Models\Instructor;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
     public function index(){
-        return view('frontend.index');
+        $categories = Category::with('course')->where('status', 1)->limit(7)->get();
+        $courses = Course::with('items.subject')->where('status', 1)->get();
+        return view('frontend.index',compact('categories','courses'));
     }
     public function coursePage(){
          $allCourses = Course::where('status',1)->paginate(16);
@@ -21,7 +25,8 @@ class FrontendController extends Controller
         return view('frontend.course_details',compact('course','getInstructors'));
     }
     public function aboutUs(){
-        return view('frontend.about_us');
+        $instructors = Instructor::where('status',1)->get();
+        return view('frontend.about_us',compact('instructors'));
     }
     public function contactUs(){
         return view('frontend.contact_us');

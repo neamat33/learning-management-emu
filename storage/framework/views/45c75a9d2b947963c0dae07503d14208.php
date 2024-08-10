@@ -12,19 +12,34 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('admin/asset/css/main.css')); ?>">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
 <body>
 <section class="material-half-bg">
     <div class="cover"></div>
 </section>
 <section class="login-content">
-    <div class="login-box">
-        <form class="login-form" method="POST" action="<?php echo e(route('login')); ?>">
+    <div class="login-box" style="min-height: 470px!important;">
+        <form class="login-form" method="POST" action="<?php echo e(route('student_register')); ?>">
             <?php echo csrf_field(); ?>
-            <h3 class="login-head"><img src="<?php echo e(asset('images')); ?>/logo.png" alt="" width="50"> SIGN IN</h3>
+            <h3 class="login-head"><img src="<?php echo e(asset('images')); ?>/logo.png" alt="" width="50"> SIGN UP</h3>
             <div class="form-group">
-                <label class="control-label">USERNAME</label>
+                <label class="control-label">Phone Number <span class="text-danger">*</span></label>
+                <input class="form-control" name="phone_number" type="number" placeholder="phone number" autofocus>
+                <?php $__errorArgs = ['phone_number'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <span class="invalid-feedback" role="alert" style="color: red;">
+                    <strong><?php echo e($message); ?></strong>
+                </span>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email <span class="text-danger">*</span> </label>
                 <input class="form-control" name="email" type="email" placeholder="Email" autofocus>
                 <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -40,7 +55,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="form-group">
-                <label class="control-label">PASSWORD</label>
+                <label class="control-label">Password <span class="text-danger">*</span></label>
                 <input class="form-control" name="password" type="password" placeholder="Password">
                 <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -59,18 +74,17 @@ unset($__errorArgs, $__bag); ?>
                 <div class="utility">
                     <div class="animated-checkbox">
                         <label>
-                            <a href="<?php echo e(route('student_register_page')); ?>">
-                            <i class="fa fa-sign-in fa-lg fa-fw"></i> <span class="label-text">Register Hear</span>
+                            <a href="<?php echo e(route('login')); ?>">
+                                <i class="fa fa-sign-in fa-lg fa-fw"></i> <span class="label-text">Already Register! please Login</span>
                             </a>
                         </label>
                     </div>
                 </div>
             </div>
             <div class="form-group btn-container">
-                <button class="btn btn-primary btn-block" style="background-color: #034774;"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+                <button class="btn btn-primary btn-block" style="background-color: #034774;"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN UP</button>
             </div>
-
-            <div style="text-align: center!important; margin-top: 8px">
+            <div style="text-align: center!important; margin-top: 5px">
                 <spna>
                     <a href="<?php echo e(Url('/')); ?>">
                         <i class="fa fa-backward" aria-hidden="true"></i>  Back to Home
@@ -97,4 +111,4 @@ unset($__errorArgs, $__bag); ?>
 </script>
 </body>
 </html>
-<?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/frontend/auth/login.blade.php ENDPATH**/ ?>
+<?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/frontend/auth/registration.blade.php ENDPATH**/ ?>

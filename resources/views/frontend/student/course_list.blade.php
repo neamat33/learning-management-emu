@@ -11,39 +11,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card bg-transparent card-body pb-0 px-0 mt-2 mt-sm-0">
-                        <div class="row d-sm-flex justify-sm-content-between mt-2 mt-md-0">
-                            <!-- Avatar -->
-                            <div class="col-auto">
-                                <div class="avatar avatar-xxl position-relative mt-n3">
-                                    <img class="avatar-img rounded-circle border border-white border-3 shadow" src="https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg" alt="">
-                                    <span class="badge text-bg-success rounded-pill position-absolute top-50 start-100 translate-middle mt-4 mt-md-5 ms-n3 px-md-3">Pro</span>
-                                </div>
-                            </div>
-                            <!-- Profile info -->
-                            <div class="col d-sm-flex justify-content-between align-items-center">
-                                <div>
-                                    <h1 class="my-1 fs-4">Lori Stevens</h1>
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item me-3 mb-1 mb-sm-0">
-                                            <span class="h6">255</span>
-                                            <span class="text-body fw-light">points</span>
-                                        </li>
-                                        <li class="list-inline-item me-3 mb-1 mb-sm-0">
-                                            <span class="h6">7</span>
-                                            <span class="text-body fw-light">Completed courses</span>
-                                        </li>
-                                        <li class="list-inline-item me-3 mb-1 mb-sm-0">
-                                            <span class="h6">52</span>
-                                            <span class="text-body fw-light">Completed lessons</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- Button -->
-                            </div>
-                        </div>
+                       @include('frontend.student.comon')
                     </div>
-
-                    <!-- Advanced filter responsive toggler START -->
                     <!-- Divider -->
                     <hr class="d-xl-none">
                     <div class="col-12 col-xl-3 d-flex justify-content-between align-items-center">
@@ -85,7 +54,10 @@
                                     <a class="list-group-item" href="{{route('course.details')}}"><i class="far fa-fw fa-file-alt me-2"></i>Course Resume</a>
                                     <a class="list-group-item" href="{{route('course.quiz')}}"><i class="bi bi-question-diamond fa-fw me-2"></i>Quiz</a>
                                     <a class="list-group-item" href="{{route('profile.update')}}"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>
-                                    <a class="list-group-item text-danger bg-danger-soft-hover" href="#"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign Out</a>
+                                    <a class="list-group-item text-danger bg-danger-soft-hover" href="{{route('student.logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign Out</a>
+                                    <form id="logout-form" action="{{ route('student.logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </div>
                             </div>
                         </div>

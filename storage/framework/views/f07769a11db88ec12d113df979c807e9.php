@@ -167,6 +167,10 @@
     Page content END -->
 
     <!-- =======================
+    <?php
+       $course = \App\Models\Course::limit(1)->latest()->first();
+    ?>
+
     Action box START -->
     <section class="pt-0">
         <div class="container">
@@ -180,13 +184,13 @@
                         <div class="row g-3 align-items-center">
                             <!-- Image -->
                             <div class="col-sm-5 col-lg-12 col-xl-5">
-                                <img src="<?php echo e(asset('web')); ?>/assets/images/book/01.jpg" alt="">
+                                <img src="<?php echo e(asset($course->image)); ?>" alt="" style="height: 210px;width: 210px">
                             </div>
 
                             <!-- Content -->
                             <div class="col-sm-7 col-lg-12 col-xl-7">
                                 <!-- Title -->
-                                <h3 class="mb-2">Best selling book of the month</h3>
+                                <h3 class="mb-2">Best selling Course of the month</h3>
                                 <!-- Rating star -->
                                 <ul class="list-inline mb-2">
                                     <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
@@ -197,7 +201,7 @@
                                 </ul>
 
                                 <!-- Title and price -->
-                                <h6 class="lead fw-bold mb-2">HTML and CSS: Design and Build Websites (Paperback)</h6>
+                                <h6 class="lead fw-bold mb-2"><?php echo e($course->course_title); ?></h6>
                                 <!-- Button -->
                                 <a href="#" class="btn btn-sm btn-purple mb-0">Buy now</a>
                             </div>
@@ -215,8 +219,8 @@
                             <!-- Content -->
                             <div class="col-sm-7 col-lg-12 col-xl-7">
                                 <h2 class="mb-1 fs-1">50%OFF</h2>
-                                <p class="mb-3 h5 fw-light lead">Enroll now in the most popular and best-rated Books.</p>
-                                <a href="#" class="btn btn-dark mb-0">View Books</a>
+                                <p class="mb-3 h5 fw-light lead">Enroll now in the most popular and best-rated Courses.</p>
+
                             </div>
 
                             <!-- Image -->
