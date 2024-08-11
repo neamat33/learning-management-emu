@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\ClassController;
+use App\Http\Controllers\Admin\NoticeBoardController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\SectionController;
@@ -173,6 +174,13 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/contact/message',[\App\Http\Controllers\FrontendController::class, 'contactMessage'])->name('contact.index');
         Route::get('/contact/message/delete/{id}',[\App\Http\Controllers\FrontendController::class, 'messageDelete'])->name('message.delete');
+        // notice
+        Route::get('/notice/list',[NoticeBoardController::class, 'index'])->name('notice.board.index');
+        Route::get('/notice/create',[NoticeBoardController::class, 'create'])->name('notice.board.create');
+        Route::post('/notice/store',[NoticeBoardController::class, 'store'])->name('notice.board.store');
+        Route::get('/notice/edit/{id}',[NoticeBoardController::class, 'edit'])->name('notice.board.edit');
+        Route::post('/notice/update/{id}',[NoticeBoardController::class, 'update'])->name('notice.board.update');
+        Route::get('/notice/delete/{id}',[NoticeBoardController::class, 'delete'])->name('notice.board.delete');
 
     });
 });

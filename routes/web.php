@@ -27,6 +27,7 @@ Route::get('/about-us', [\App\Http\Controllers\FrontendController::class, 'about
 Route::get('/contact-us', [\App\Http\Controllers\FrontendController::class, 'contactUs'])->name('frontend.contact.page');
 Route::get('/course/details/{id}', [\App\Http\Controllers\FrontendController::class, 'courseDetailsPage'])->name('course.details.page');
 Route::post('/contact/store',[\App\Http\Controllers\FrontendController::class,'contactStore'])->name('contact.message.store');
+Route::get('/notice',[\App\Http\Controllers\FrontendController::class,'notice'])->name('notice.index');
 require('admin.php');
 require('student.php');
 

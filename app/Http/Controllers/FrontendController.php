@@ -7,6 +7,7 @@ use App\Models\Contact;
 use App\Models\Course;
 use App\Models\CourseSubject;
 use App\Models\Instructor;
+use App\Models\NoticeBoard;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\AssignOp\Concat;
 
@@ -49,5 +50,9 @@ class FrontendController extends Controller
         $data = Contact::findOrFail($id);
         $data->delete();
         return redirect()->back()->with('success', 'Data Delete Successfully!');
+    }
+    public function notice(){
+        $notices = NoticeBoard::where('status',1)->latest()->paginate(10);
+        return view('frontend.notice',compact('notices'));
     }
 }

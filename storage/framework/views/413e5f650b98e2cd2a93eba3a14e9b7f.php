@@ -263,6 +263,11 @@
                 <div data-i18n="Contact Message">Contact Message</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="<?php echo e(route('notice.board.index')); ?>" class="menu-link">
+                <div data-i18n="Notice Board">Notice Board</div>
+            </a>
+        </li>
     </ul>
 </aside>
 <?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/admin/layouts/sidebar.blade.php ENDPATH**/ ?>

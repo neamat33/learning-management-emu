@@ -42,7 +42,7 @@
                         <a class="btn btn-primary-soft" style="font-weight: bold;padding: 8px 20px">ফ্রি সার্ভিস</a>
                     </li>
                     <li class="nav-item" style="margin-left: 2px">
-                        <a class="btn btn-primary-soft" style="font-weight: bold;padding: 8px 20px">নোটিশ</a>
+                        <a href="{{route('notice.index')}}" class="btn btn-primary-soft" style="font-weight: bold;padding: 8px 20px">নোটিশ</a>
                     </li>
                 </ul>
                 <!-- Nav Main menu END -->
