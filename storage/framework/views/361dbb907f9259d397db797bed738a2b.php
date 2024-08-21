@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('web')); ?>/assets/vendor/stepper/css/bs-stepper.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('web')); ?>/assets/vendor/glightbox/css/glightbox.css">
     <link id="style-switch" rel="stylesheet" type="text/css" href="<?php echo e(asset('web')); ?>/assets/css/style.css">
-
+    <?php echo $__env->yieldPushContent('styles'); ?>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7N7LGGGWT1"></script>
     <script>
@@ -69,7 +69,7 @@ Footer END -->
 <script src="<?php echo e(asset('web/assets/vendor/sticky-js/sticky.min.js')); ?>"></script>
 <script src="<?php echo e(asset('web')); ?>/assets/vendor/choices/js/choices.min.js"></script>
 <script src="<?php echo e(asset('web')); ?>/assets/js/functions.js"></script>
-
+<?php echo $__env->yieldPushContent('js'); ?>
 <script>
     var loadFile = function(event) {
         var output = document.getElementById('uploadfile-1-preview');

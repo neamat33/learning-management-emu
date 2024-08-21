@@ -55,4 +55,12 @@ class FrontendController extends Controller
         $notices = NoticeBoard::where('status',1)->latest()->paginate(10);
         return view('frontend.notice',compact('notices'));
     }
+
+    public function cartPage(Request $request){
+          $course = Course::where('id',$request->course_id)->first();
+          return view('frontend.cart',compact('course'));
+    }
+    public function storeOrderData(Request $request){
+         dd($request->all());
+    }
 }

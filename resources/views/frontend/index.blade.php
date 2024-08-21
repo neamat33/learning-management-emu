@@ -467,7 +467,7 @@
                                             <!-- Price -->
                                             <div>
                                                 <h4 class="text-success mb-0 item-show">৳ {{$course->price}}</h4>
-                                                <a href="#" class="btn btn-sm btn-success-soft item-show-hover"><i class="fas fa-shopping-cart me-2"></i>Add to cart</a>
+                                                <a href="{{route('cart.index',['course_id' => $course->id])}}" class="btn btn-sm btn-success-soft item-show-hover"><i class="fas fa-shopping-cart me-2"></i>Add to cart</a>
                                             </div>
                                         </div>
                                     </div>

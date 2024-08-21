@@ -28,6 +28,10 @@ Route::get('/contact-us', [\App\Http\Controllers\FrontendController::class, 'con
 Route::get('/course/details/{id}', [\App\Http\Controllers\FrontendController::class, 'courseDetailsPage'])->name('course.details.page');
 Route::post('/contact/store',[\App\Http\Controllers\FrontendController::class,'contactStore'])->name('contact.message.store');
 Route::get('/notice',[\App\Http\Controllers\FrontendController::class,'notice'])->name('notice.index');
+Route::get('/buy/course',[\App\Http\Controllers\FrontendController::class,'cartPage'])->name('cart.index');
+Route::post('/buy/course/store',[\App\Http\Controllers\FrontendController::class,'storeOrderData'])->name('store.buy.course');
+
+
 require('admin.php');
 require('student.php');
 

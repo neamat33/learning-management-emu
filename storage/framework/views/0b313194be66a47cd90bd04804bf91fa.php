@@ -1,4 +1,4 @@
-<?php $__env->startSection('page-title', 'Notice Board List'); ?>
+<?php $__env->startSection('page-title', 'Notice List'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-2 mb-2"><span class="text-muted fw-light"> Notice List</span></h4>
