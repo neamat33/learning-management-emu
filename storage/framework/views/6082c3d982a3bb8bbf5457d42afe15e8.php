@@ -15,28 +15,77 @@ Page content START -->
                                 Already have an account? <a href="#" class="text-reset btn-link mb-0 fw-bold">Log in</a></div>
                             <button type="button" class="btn btn-link mb-0 text-end" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x-lg text-dark"></i></button>
                         </div>
-
                         <!-- Personal info START -->
                         <div class="card card-body shadow p-4">
                             <!-- Title -->
                             <h5 class="mb-0">Personal Details</h5>
-
                             <!-- Form START -->
                             <div class="row g-3 mt-0">
                                 <!-- Name -->
                                 <div class="col-md-6 bg-light-input">
-                                    <label for="yourName" class="form-label">Your name *</label>
-                                    <input type="text" class="form-control" id="yourName" name="name" placeholder="Name">
+                                    <label for="yourName" class="form-label">Your Name *</label>
+                                    <input type="text" class="form-control <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="yourName" value="<?php echo e(old('name')); ?>" name="name" placeholder="Name">
+                                    <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="text-danger"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <!-- Email -->
                                 <div class="col-md-6 bg-light-input">
                                     <label for="emailInput" class="form-label">Email Address </label>
-                                    <input type="email" class="form-control" name="email" id="emailInput" placeholder="Email">
+                                    <input type="email" class="form-control <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('email')); ?>" name="email" id="emailInput" placeholder="Email">
+                                    <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="text-danger"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <!-- Number -->
                                 <div class="col-md-6 bg-light-input">
                                     <label for="mobileNumber" class="form-label">Mobile number *</label>
-                                    <input type="text" class="form-control" name="phone_number" id="mobileNumber" placeholder="Mobile number">
+                                    <input type="text" class="form-control <?php $__errorArgs = ['phone_number'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('phone_number')); ?>" name="phone_number" id="mobileNumber" placeholder="Mobile number">
+                                    <?php $__errorArgs = ['phone_number'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="text-danger"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <!-- Address -->
                                 <div class="col-md-6 bg-light-input">
@@ -60,7 +109,14 @@ Page content START -->
                                                 <!-- Course item -->
                                                 <td style="width: 70%">
                                                     <div class="d-lg-flex align-items-center">
-                                                        <input type="radio" id="bkash" style="height: 20px;width: 20px" name="payment_type" value="bkash" >
+                                                        <input type="radio" id="bkash" style="height: 20px;width: 20px" name="payment_type" value="bkash" class="<?php $__errorArgs = ['payment_type'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" required >
                                                         <!-- Title -->
                                                         <h6 class="mb-0 ms-lg-3 mt-2 mt-lg-0">
                                                             <span>Bkash</span>
@@ -85,7 +141,14 @@ Page content START -->
                                                 <td style="width: 70%">
                                                     <div class="d-lg-flex align-items-center">
                                                         <!-- Image -->
-                                                        <input type="radio" id="ssl" style="height: 20px;width: 20px" name="payment_type" value="ssl" >
+                                                        <input type="radio" id="ssl" style="height: 20px;width: 20px" name="payment_type" value="ssl" class="<?php $__errorArgs = ['payment_type'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" required>
                                                         <!-- Title -->
                                                         <h6 class="mb-0 ms-lg-3 mt-2 mt-lg-0">
                                                             <span>SSL Commerce</span>
@@ -147,6 +210,7 @@ Page content START -->
                                             <span class="h5 mb-0">৳ <?php echo e($course->price); ?></span>
                                         </li>
                                     </ul>
+                                    <input type="hidden" name="course_id" value="<?php echo e($course->id); ?>">
                                     <!-- Button -->
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-lg btn-success">Place Order</button>

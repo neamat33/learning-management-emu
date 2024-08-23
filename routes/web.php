@@ -30,6 +30,7 @@ Route::post('/contact/store',[\App\Http\Controllers\FrontendController::class,'c
 Route::get('/notice',[\App\Http\Controllers\FrontendController::class,'notice'])->name('notice.index');
 Route::get('/buy/course',[\App\Http\Controllers\FrontendController::class,'cartPage'])->name('cart.index');
 Route::post('/buy/course/store',[\App\Http\Controllers\FrontendController::class,'storeOrderData'])->name('store.buy.course');
+Route::get('/success',[\App\Http\Controllers\FrontendController::class,'successPage'])->name('success.page');
 
 
 require('admin.php');

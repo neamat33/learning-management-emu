@@ -8,6 +8,8 @@ use App\Models\Course;
 use App\Models\CourseSubject;
 use App\Models\Instructor;
 use App\Models\NoticeBoard;
+use App\Models\Order;
+use App\Models\Student\Student;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\AssignOp\Concat;
 
@@ -61,6 +63,34 @@ class FrontendController extends Controller
           return view('frontend.cart',compact('course'));
     }
     public function storeOrderData(Request $request){
-         dd($request->all());
+      $request->validate([
+         'name' => 'required',
+          'email' => 'required|unique:students',
+          'phone_number' => 'required|unique:students',
+         'payment_type' => 'required',
+      ]);
+        if ($request->student_id){
+            $student = Student::findOrFail($request->student_id);
+        }else{
+            $student = new Student();
+            $student->name = $request->name;
+            $student->email = strtolower($request->email);
+            $student->phone_number = $request->phone_number;
+            $student->password =  bcrypt($request->phone_number);
+            $student->save();
+        }
+        $order = new Order();
+        $order->student_id = $student->id;
+        $order->course_id = $request->course_id;
+        $order->payment_type = $request->payment_type;
+        $order->payment_status = $request->payment_status;
+        $order->total_price = $request->total_price;
+        $order->status = 'pending';
+        $order->save();
+        return redirect()->route('success.page');
+    }
+
+    public function successPage(){
+        return view('frontend.success');
     }
 }

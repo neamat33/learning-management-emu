@@ -16,28 +16,35 @@ Page content START -->
                                 Already have an account? <a href="#" class="text-reset btn-link mb-0 fw-bold">Log in</a></div>
                             <button type="button" class="btn btn-link mb-0 text-end" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x-lg text-dark"></i></button>
                         </div>
-
                         <!-- Personal info START -->
                         <div class="card card-body shadow p-4">
                             <!-- Title -->
                             <h5 class="mb-0">Personal Details</h5>
-
                             <!-- Form START -->
                             <div class="row g-3 mt-0">
                                 <!-- Name -->
                                 <div class="col-md-6 bg-light-input">
-                                    <label for="yourName" class="form-label">Your name *</label>
-                                    <input type="text" class="form-control" id="yourName" name="name" placeholder="Name">
+                                    <label for="yourName" class="form-label">Your Name *</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="yourName" value="{{old('name')}}" name="name" placeholder="Name">
+                                    @error('name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <!-- Email -->
                                 <div class="col-md-6 bg-light-input">
                                     <label for="emailInput" class="form-label">Email Address </label>
-                                    <input type="email" class="form-control" name="email" id="emailInput" placeholder="Email">
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" name="email" id="emailInput" placeholder="Email">
+                                    @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <!-- Number -->
                                 <div class="col-md-6 bg-light-input">
                                     <label for="mobileNumber" class="form-label">Mobile number *</label>
-                                    <input type="text" class="form-control" name="phone_number" id="mobileNumber" placeholder="Mobile number">
+                                    <input type="text" class="form-control @error('phone_number') is-invalid @enderror" value="{{old('phone_number')}}" name="phone_number" id="mobileNumber" placeholder="Mobile number">
+                                    @error('phone_number')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <!-- Address -->
                                 <div class="col-md-6 bg-light-input">
@@ -61,7 +68,7 @@ Page content START -->
                                                 <!-- Course item -->
                                                 <td style="width: 70%">
                                                     <div class="d-lg-flex align-items-center">
-                                                        <input type="radio" id="bkash" style="height: 20px;width: 20px" name="payment_type" value="bkash" >
+                                                        <input type="radio" id="bkash" style="height: 20px;width: 20px" name="payment_type" value="bkash" class="@error('payment_type') is-invalid @enderror" required >
                                                         <!-- Title -->
                                                         <h6 class="mb-0 ms-lg-3 mt-2 mt-lg-0">
                                                             <span>Bkash</span>
@@ -86,7 +93,7 @@ Page content START -->
                                                 <td style="width: 70%">
                                                     <div class="d-lg-flex align-items-center">
                                                         <!-- Image -->
-                                                        <input type="radio" id="ssl" style="height: 20px;width: 20px" name="payment_type" value="ssl" >
+                                                        <input type="radio" id="ssl" style="height: 20px;width: 20px" name="payment_type" value="ssl" class="@error('payment_type') is-invalid @enderror" required>
                                                         <!-- Title -->
                                                         <h6 class="mb-0 ms-lg-3 mt-2 mt-lg-0">
                                                             <span>SSL Commerce</span>
@@ -148,6 +155,7 @@ Page content START -->
                                             <span class="h5 mb-0">৳ {{$course->price}}</span>
                                         </li>
                                     </ul>
+                                    <input type="hidden" name="course_id" value="{{$course->id}}">
                                     <!-- Button -->
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-lg btn-success">Place Order</button>
