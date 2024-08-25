@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    
-    public function __construct()
-    {
-       
-    }
 
     public function index()
     {
@@ -37,6 +32,14 @@ class CategoryController extends Controller
     {
        return Category::where('id', $id)->where('status', 1)->first();
     }
+    public function show($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return back()->with('success', 'Deleted successfully');;
+
+    }
+
 
     public function update(Request $request, $id)
     {
@@ -54,8 +57,9 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
+        dd('ok');
         try {
-            $category = Category::find($id);
+            $category = Category::findOrFail($id);
             $category->delete();
             return redirect()->route('categories.index')->with('success', 'Deleted successfully');
         }catch (\Exception $e) {

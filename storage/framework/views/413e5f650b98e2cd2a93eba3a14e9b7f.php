@@ -249,15 +249,15 @@
             </li>
         <?php endif; ?>
 
-        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('setting')): ?>
-            <li class="menu-item active open">
-                <a href="<?php echo e(route('setting')); ?>" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons ti ti-layout-grid"></i>
-                    <div data-i18n="Setting">Setting</div>
 
-                </a>
-            </li>
-        <?php endif; ?>
+
+
+
+
+
+
+
+
         <li class="menu-item">
             <a href="<?php echo e(route('contact.index')); ?>" class="menu-link">
                 <div data-i18n="Contact Message">Contact Message</div>
@@ -266,6 +266,11 @@
         <li class="menu-item">
             <a href="<?php echo e(route('notice.board.index')); ?>" class="menu-link">
                 <div data-i18n="Notice Board">Notice Board</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="<?php echo e(route('order.index')); ?>" class="menu-link">
+                <div data-i18n="Order List">Order List</div>
             </a>
         </li>
     </ul>

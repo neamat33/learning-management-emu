@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\NoticeBoardController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\SectionController;
@@ -181,6 +182,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/notice/edit/{id}',[NoticeBoardController::class, 'edit'])->name('notice.board.edit');
         Route::post('/notice/update/{id}',[NoticeBoardController::class, 'update'])->name('notice.board.update');
         Route::get('/notice/delete/{id}',[NoticeBoardController::class, 'delete'])->name('notice.board.delete');
+
+        Route::get('/order/list',[OrderController::class, 'index'])->name('order.index');
+        Route::get('/order/pending/{id}',[OrderController::class, 'pending'])->name('order.pending');
+        Route::get('/order/confirm/{id}',[OrderController::class, 'confirm'])->name('order.confirm');
 
     });
 });

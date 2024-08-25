@@ -249,15 +249,15 @@
             </li>
         @endcan
 
-        @can('setting')
-            <li class="menu-item active open">
-                <a href="{{ route('setting') }}" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons ti ti-layout-grid"></i>
-                    <div data-i18n="Setting">Setting</div>
+{{--        @can('setting')--}}
+{{--            <li class="menu-item active open">--}}
+{{--                <a href="{{ route('setting') }}" class="menu-link menu-toggle">--}}
+{{--                    <i class="menu-icon tf-icons ti ti-layout-grid"></i>--}}
+{{--                    <div data-i18n="Setting">Setting</div>--}}
 
-                </a>
-            </li>
-        @endcan
+{{--                </a>--}}
+{{--            </li>--}}
+{{--        @endcan--}}
         <li class="menu-item">
             <a href="{{ route('contact.index') }}" class="menu-link">
                 <div data-i18n="Contact Message">Contact Message</div>
@@ -266,6 +266,11 @@
         <li class="menu-item">
             <a href="{{ route('notice.board.index') }}" class="menu-link">
                 <div data-i18n="Notice Board">Notice Board</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('order.index') }}" class="menu-link">
+                <div data-i18n="Order List">Order List</div>
             </a>
         </li>
     </ul>

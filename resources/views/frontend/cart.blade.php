@@ -156,6 +156,7 @@ Page content START -->
                                         </li>
                                     </ul>
                                     <input type="hidden" name="course_id" value="{{$course->id}}">
+                                    <input type="hidden" name="total_price" value="{{$course->price}}">
                                     <!-- Button -->
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-lg btn-success">Place Order</button>

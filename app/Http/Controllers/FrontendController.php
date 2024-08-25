@@ -60,6 +60,10 @@ class FrontendController extends Controller
 
     public function cartPage(Request $request){
           $course = Course::where('id',$request->course_id)->first();
+//            $course = Course::where(['id' => $request->course_id, 'status' => 1])->first();
+            if(!$course){
+                return back();
+            }
           return view('frontend.cart',compact('course'));
     }
     public function storeOrderData(Request $request){
@@ -69,6 +73,7 @@ class FrontendController extends Controller
           'phone_number' => 'required|unique:students',
          'payment_type' => 'required',
       ]);
+
         if ($request->student_id){
             $student = Student::findOrFail($request->student_id);
         }else{

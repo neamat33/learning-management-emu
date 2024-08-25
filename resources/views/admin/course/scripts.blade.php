@@ -8,7 +8,7 @@
             var cols = "";
 
             cols += '<td><select name="subject[]" class="select1 item-select">\n\
-                        <option value="">Select Item</option>\n\
+                        <option value="">Select Subject</option>\n\
                         @foreach ($subjects as $val)\n\
                         <option value="{{ $val->id }}" >{{ $val->subject_name }}</option>\n\
                         @endforeach\n\

@@ -3,7 +3,6 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-2 mb-2"><span class="text-muted fw-light">Academic /</span> Category</h4>
-
         <!-- DataTable with Buttons -->
         <div class="card">
             <div class="card-header py-3 d-flex align-items-center justify-content-between">
@@ -23,12 +22,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                         @foreach($categories as $key=>$item)
                         <tr>
                             <td>{{ ++$key }}</td>
                             <td>{{ $item->name}}</td>
-                            <td>       
+                            <td>
                                 @if ($item->status == 1)
                                     <span class="badge bg-success set-status" id="status_{{ $item->id}}"
                                         onclick="setActive({{ $item->id}})">Active</span>
@@ -38,10 +37,16 @@
                                 @endif
 
                             </td>
-                            <td><a data-id="{{ $item->id}}" data-bs-toggle="modal" data-bs-target="#EditModal"
+                            <td>
+                                <a data-id="{{ $item->id}}" data-bs-toggle="modal" data-bs-target="#EditModal"
                                 class="btn btn-primary btn-circle btn-sm editBtn">
                                 <i class="fa fa-edit text-white"></i>
-                            </a></td>
+                            </a>
+                                <a href="{{route('categories.destroy',$item->id)}}"
+                                   class="btn btn-danger btn-circle btn-sm editBtn">
+                                    <i class="fa fa-trash text-white"></i>
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -63,7 +68,7 @@
                                 <label for="">Name</label>
                                 <input type="text" class="form-control" name="name" required>
                             </div>
-                            
+
                         </div>
 
                         <div class="modal-footer">
@@ -91,7 +96,7 @@
                                 <label for="">Name</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
-                            
+
                         </div>
 
                         <div class="modal-footer">
@@ -112,7 +117,7 @@
                     success: function(data) {
                         console.log(data);
                         $('#name').val(data.name);
-                        var id = data.id; 
+                        var id = data.id;
 
                         // Replace this with actual dynamic ID value
                         var formActionUrl = "{{ route('categories.update',':id') }}";
@@ -121,7 +126,7 @@
                     },
                 });
             });
-              
+
         </script>
 
 @endsection

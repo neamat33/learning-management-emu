@@ -211,6 +211,7 @@ unset($__errorArgs, $__bag); ?>" required>
                                         </li>
                                     </ul>
                                     <input type="hidden" name="course_id" value="<?php echo e($course->id); ?>">
+                                    <input type="hidden" name="total_price" value="<?php echo e($course->price); ?>">
                                     <!-- Button -->
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-lg btn-success">Place Order</button>

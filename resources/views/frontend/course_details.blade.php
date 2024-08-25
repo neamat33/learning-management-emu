@@ -1,6 +1,5 @@
 @extends('frontend.layouts.app')
 @section('content')
-
     <!-- =======================
 Page content START -->
     <section class="pt-5">
@@ -37,7 +36,7 @@ Page content START -->
                                         <!-- Buttons and price -->
                                         <div class="text-center">
                                             <!-- Buttons -->
-                                            <a href="#" class="btn btn-success-soft mb-2 mb-sm-0 me-00 me-sm-3"><i class="bi bi-cart3 me-2"></i>প্রোগ্রামে ভর্তি হও</a>
+                                            <a href="{{route('cart.index',['course_id' => $course->id])}}" class="btn btn-success-soft mb-2 mb-sm-0 me-00 me-sm-3"><i class="bi bi-cart3 me-2"></i>প্রোগ্রামে ভর্তি হও</a>
                                             <a href="#" class="btn btn-white-soft mb-0"><h4 class="text-success mb-0 item-show">৳ {{$course->price}}</h4></a>
                                         </div>
                                     </div>

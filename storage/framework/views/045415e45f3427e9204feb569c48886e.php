@@ -1,6 +1,5 @@
-@extends('admin.layouts.app')
-@section('page-title', 'Add Course')
-@section('content')
+<?php $__env->startSection('page-title', 'Add Course'); ?>
+<?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-2 mb-2"><span class="text-muted fw-light">Academic /</span> Course</h4>
 
@@ -8,90 +7,91 @@
         <div class="card">
             <div class="card-header py-3 d-flex align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Course Add</h6>
-                <h6 class="m-0 font-weight-bold text-primary"><a href="{{ route('courses.index') }}"
+                <h6 class="m-0 font-weight-bold text-primary"><a href="<?php echo e(route('courses.index')); ?>"
                         class="btn btn-sm btn-primary"><i class="fa fa-eye"></i>&nbsp; Course List</a></h6>
             </div>
             <div class="card-body">
 
-                <form action="{{ route('courses.store') }}" method="POST" enctype='multipart/form-data'>
-                    @csrf
+                <form action="<?php echo e(route('courses.store')); ?>" method="POST" enctype='multipart/form-data'>
+                    <?php echo csrf_field(); ?>
                     <div class="modal-body ">
                         <div class="row">
 
                             <div class="form-group col-md-4">
                                 <label for=""><b>Course Title </b><span class="text-danger">*</span></label>
-                                <input name="course_title" id="course_title" value="{{ old('course_title') }}"
+                                <input name="course_title" id="course_title" value="<?php echo e(old('course_title')); ?>"
                                     class="form-control mt-2" required />
-                                @if ($errors->has('course_title'))
-                                    <span class="invalid-feedback">{{ $errors->first('course_title') }}</span>
-                                @endif
+                                <?php if($errors->has('course_title')): ?>
+                                    <span class="invalid-feedback"><?php echo e($errors->first('course_title')); ?></span>
+                                <?php endif; ?>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="" class="mb-2"><b>Course Catgeory </b><span
                                         class="text-danger">*</span></label>
                                 <select name="category_id" id="category_id" class="form-control" required>
                                     <option value="">Select Item</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}
+                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?>
+
                                         </option>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for=""><b>Course Price </b></label>
-                                <input name="price" id="price" value="{{ old('price') }}"
+                                <input name="price" id="price" value="<?php echo e(old('price')); ?>"
                                     class="form-control mt-2" />
-                                @if ($errors->has('price'))
-                                    <span class="invalid-feedback">{{ $errors->first('price') }}</span>
-                                @endif
+                                <?php if($errors->has('price')): ?>
+                                    <span class="invalid-feedback"><?php echo e($errors->first('price')); ?></span>
+                                <?php endif; ?>
                             </div>
                             <div class="form-group col-md-4 mt-2">
                                 <label for=""><b>Discount Price </b><span class="text-danger">*</span></label>
-                                <input name="discount_price" id="discount_price" value="{{ old('discount_price') }}"
+                                <input name="discount_price" id="discount_price" value="<?php echo e(old('discount_price')); ?>"
                                     class="form-control mt-2" />
-                                @if ($errors->has('discount_price'))
-                                    <span class="invalid-feedback">{{ $errors->first('discount_price') }}</span>
-                                @endif
+                                <?php if($errors->has('discount_price')): ?>
+                                    <span class="invalid-feedback"><?php echo e($errors->first('discount_price')); ?></span>
+                                <?php endif; ?>
                             </div>
 
                             <div class="form-group col-md-4 mt-2">
                                 <label for=""><b>Start Date </b><span class="text-danger">*</span></label>
-                                <input type="text" name="start_date" id="start_date" value="{{ date('Y-m-d') }}"
+                                <input type="text" name="start_date" id="start_date" value="<?php echo e(date('Y-m-d')); ?>"
                                     class="form-control mt-2" />
-                                @if ($errors->has('start_date'))
-                                    <span class="invalid-feedback">{{ $errors->first('start_date') }}</span>
-                                @endif
+                                <?php if($errors->has('start_date')): ?>
+                                    <span class="invalid-feedback"><?php echo e($errors->first('start_date')); ?></span>
+                                <?php endif; ?>
                             </div>
 
                             <div class="form-group col-md-4 mt-2">
                                 <label for=""><b>Cover Photo </b></label>
                                 <input type="file" name="image" id="image" class="form-control mt-2" />
-                                @if ($errors->has('image'))
-                                    <span class="invalid-feedback">{{ $errors->first('image') }}</span>
-                                @endif
+                                <?php if($errors->has('image')): ?>
+                                    <span class="invalid-feedback"><?php echo e($errors->first('image')); ?></span>
+                                <?php endif; ?>
                             </div>
                             <div class="form-group col-md-4 mt-2">
                                 <label for=""><b>Class Routine (Image)</b></label>
                                 <input type="file" name="class_routine" id="class_routine" class="form-control mt-2" />
-                                @if ($errors->has('class_routine'))
-                                    <span class="invalid-feedback">{{ $errors->first('class_routine') }}</span>
-                                @endif
+                                <?php if($errors->has('class_routine')): ?>
+                                    <span class="invalid-feedback"><?php echo e($errors->first('class_routine')); ?></span>
+                                <?php endif; ?>
                             </div>
                             <div class="form-group col-md-8 mt-2">
                                 <label for=""><b>Short Video </b></label>
-                                <input type="text" name="video" id="video" value="{{ old('video') }}"
+                                <input type="text" name="video" id="video" value="<?php echo e(old('video')); ?>"
                                     class="form-control mt-2" />
-                                @if ($errors->has('video'))
-                                    <span class="invalid-feedback">{{ $errors->first('video') }}</span>
-                                @endif
+                                <?php if($errors->has('video')): ?>
+                                    <span class="invalid-feedback"><?php echo e($errors->first('video')); ?></span>
+                                <?php endif; ?>
                             </div>
 
                             <div class="form-group col-md-12 mt-2">
                                 <label for=""><b>Course Description </b></label>
-                                <textarea name="course_description" class="form-control mt-2" rows="2" required>{{ old('course_description') }}</textarea>
-                                @if ($errors->has('course_description'))
-                                    <span class="invalid-feedback">{{ $errors->first('course_description') }}</span>
-                                @endif
+                                <textarea name="course_description" class="form-control mt-2" rows="2" required><?php echo e(old('course_description')); ?></textarea>
+                                <?php if($errors->has('course_description')): ?>
+                                    <span class="invalid-feedback"><?php echo e($errors->first('course_description')); ?></span>
+                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -114,20 +114,22 @@
                                                 <select name="subject[]" class="select1 form-control"
                                                     style="min-width: 100px" required>
                                                     <option value="">Select Subject</option>
-                                                    @foreach ($subjects as $val)
-                                                        <option value="{{ $val->id }}">{{ $val->subject_name }}
+                                                    <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($val->id); ?>"><?php echo e($val->subject_name); ?>
+
                                                         </option>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
                                             <td>
                                                 <select name="instructor[]" class="select1 form-control"
                                                     style="min-width: 100px" required>
                                                     <option value="">Select Teacher</option>
-                                                    @foreach ($instructors as $instructor)
-                                                        <option value="{{ $instructor->id }}">{{ $instructor->name }}
+                                                    <?php $__currentLoopData = $instructors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $instructor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($instructor->id); ?>"><?php echo e($instructor->name); ?>
+
                                                         </option>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </td>
                                             <td>
@@ -171,8 +173,8 @@
 
     </div>
 
-@endsection
-@section('extra_js')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('extra_js'); ?>
     <script>
         var jq = $.noConflict();
         jq(document).ready(function() {
@@ -199,17 +201,17 @@
                     <td>
                         <select name="subject[]" class="select1 form-control" style="min-width: 100px" required>
                             <option value="">Select subject</option>
-                            @foreach ($subjects as $val)
-                                <option value="{{ $val->id }}">{{ $val->subject_name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $val): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($val->id); ?>"><?php echo e($val->subject_name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </td>
                     <td>
                         <select name="instructor[]" class="select1 form-control" style="min-width: 100px" required>
                             <option value="">Select Teacher</option>
-                            @foreach ($instructors as $instructor)
-                                <option value="{{ $instructor->id }}">{{ $instructor->name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $instructors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $instructor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($instructor->id); ?>"><?php echo e($instructor->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </td>
             <td>
@@ -260,5 +262,7 @@
             });
         });
     </script>
-    {{-- @include('admin.course.scripts') --}}
-@endsection
+    
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/admin/course/create.blade.php ENDPATH**/ ?>
