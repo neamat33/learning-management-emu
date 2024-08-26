@@ -9,7 +9,7 @@
                     <div class="form-group col-md-3">
                         <input type="text" name="name" class="form-control" placeholder="Instructor Name" value="{{ request('name') }}">
                     </div>
-    
+
                     <div class="form-group col-md-3">
                         <input type="text" class="form-control" name="mobile" placeholder="Mobile No." value="{{ request('mobile') }}">
                     </div>
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </form>
         </div>
         <!-- DataTable with Buttons -->
@@ -44,33 +44,35 @@
                             <th>Email </th>
                             <th>Subject </th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th style="width: 15%; text-align: center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                         @foreach($instructors as $key=>$item)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td><img src="{{ asset($item->photo)}}" alt="" width="80" height="80"></td>
+                            <td><img src="{{ asset($item->photo)}}" alt="" width="50" height="50"></td>
                             <td>{{ $item->name}}</td>
                             <td>{{ $item->mobile}}</td>
                             <td>{{ $item->email}}</td>
                             <td>{{ $item->subject->subject_name}}</td>
                             <td>
-                                        
-                                @if ($item->status_id == 1)
-                                    <span class="badge bg-success set-status" id="status_{{ $item->id }}"
-                                        onclick="setActive({{ $item->id}})">Active</span>
+                                @if ($item->status == 1)
+                                    <a href="{{route('instructor.inactive',$item->id)}}" class="badge bg-success set-status"  title="change to InActive">Active</a>
                                 @else
-                                    <span class="badge bg-danger set-status" id="status_{{ $item->id }}"
-                                        onclick="setActive({{ $item->id}})">Inactive</span>
+                                    <a href="{{route('instructor.active',$item->id)}}" class="badge bg-danger" title="change to active">Inactive</a>
                                 @endif
-
                             </td>
-                            <td><a href="{{ route('instructors.edit',$item->id) }}" 
+                            <td style="text-align: center">
+                                <a href="{{ route('instructors.edit',$item->id) }}"
                                 class="btn btn-primary btn-circle btn-sm"><i class="fa fa-edit text-white"></i>
-                            </a></td>
+                            </a>
+                                <a href="{{ route('instructors.destroy',$item->id) }}"
+                                   class="btn btn-danger btn-circle btn-sm"><i class="fa fa-trash text-white"></i>
+                                </a>
+                            </td>
+
                         </tr>
                         @endforeach
                     </tbody>
@@ -82,9 +84,4 @@
         </div>
 
     </div>
-    <!-- Modal to edit record -->
-       
-
-
-
 @endsection

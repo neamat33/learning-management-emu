@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('page-title', 'Student Registration')
+@section('page-title', 'Instructor')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-2 mb-2"><span class="text-muted fw-light">Academic /</span> Instructor</h4>
@@ -33,7 +33,7 @@
                                     <span class="invalid-feedback">{{ $errors->first('name') }}</span>
                                 @endif
                             </div>
-                            
+
                             <div class="form-group col-md-4">
                                 <label for=""><b>Mobile </b><span class="text-danger">*</span></label>
                                 <input type="number" name="mobile" id="mobile" value="{{ old('mobile') }}"
@@ -50,7 +50,7 @@
                                     <span class="invalid-feedback">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
-                            
+
                             <div class="form-group col-md-4 mt-1">
                                 <label for=""><b>Instructor Photo </b></label>
                                 <input type="file" name="photo" id="img"
@@ -59,7 +59,7 @@
                                     <span class="invalid-feedback">{{ $errors->first('photo') }}</span>
                                 @endif
                             </div>
-                            
+
                             <div class="form-group col-md-4 mt-1">
                                 <label for=""><b>Subject Name </b></label> <br>
                                 <select name="subject_id" id="subject_id" class="form-select mt-1">
@@ -68,7 +68,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                           
+
                             <div class="form-group col-md-6 mt-1">
                                 <label for=""><b>Present Address </b></label>
                                 <textarea name="address" class="form-control mt-1" rows="1">{{ old('address') }}</textarea>
@@ -83,14 +83,14 @@
                                     <span class="invalid-feedback">{{ $errors->first('qualification') }}</span>
                                 @endif
                             </div>
-                            
+
                             <div style="text-align:right">
                                 <div class="mt-3">
                                     <p id="select-alert" class="text-danger p-2"></p>
                                     <button type="submit" class="btn btn-primary ">Save Information</button>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </form>

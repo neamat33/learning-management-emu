@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('page-title', 'Student List'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -9,7 +8,7 @@
                     <div class="form-group col-md-3">
                         <input type="text" name="name" class="form-control" placeholder="Instructor Name" value="<?php echo e(request('name')); ?>">
                     </div>
-    
+
                     <div class="form-group col-md-3">
                         <input type="text" class="form-control" name="mobile" placeholder="Mobile No." value="<?php echo e(request('mobile')); ?>">
                     </div>
@@ -23,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </form>
         </div>
         <!-- DataTable with Buttons -->
@@ -44,33 +43,35 @@
                             <th>Email </th>
                             <th>Subject </th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th style="width: 15%; text-align: center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                         <?php $__currentLoopData = $instructors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td><?php echo e(++$key); ?></td>
-                            <td><img src="<?php echo e(asset($item->photo)); ?>" alt="" width="80" height="80"></td>
+                            <td><img src="<?php echo e(asset($item->photo)); ?>" alt="" width="50" height="50"></td>
                             <td><?php echo e($item->name); ?></td>
                             <td><?php echo e($item->mobile); ?></td>
                             <td><?php echo e($item->email); ?></td>
                             <td><?php echo e($item->subject->subject_name); ?></td>
                             <td>
-                                        
-                                <?php if($item->status_id == 1): ?>
-                                    <span class="badge bg-success set-status" id="status_<?php echo e($item->id); ?>"
-                                        onclick="setActive(<?php echo e($item->id); ?>)">Active</span>
+                                <?php if($item->status == 1): ?>
+                                    <a href="<?php echo e(route('instructor.inactive',$item->id)); ?>" class="badge bg-success set-status"  title="change to InActive">Active</a>
                                 <?php else: ?>
-                                    <span class="badge bg-danger set-status" id="status_<?php echo e($item->id); ?>"
-                                        onclick="setActive(<?php echo e($item->id); ?>)">Inactive</span>
+                                    <a href="<?php echo e(route('instructor.active',$item->id)); ?>" class="badge bg-danger" title="change to active">Inactive</a>
                                 <?php endif; ?>
-
                             </td>
-                            <td><a href="<?php echo e(route('instructors.edit',$item->id)); ?>" 
+                            <td style="text-align: center">
+                                <a href="<?php echo e(route('instructors.edit',$item->id)); ?>"
                                 class="btn btn-primary btn-circle btn-sm"><i class="fa fa-edit text-white"></i>
-                            </a></td>
+                            </a>
+                                <a href="<?php echo e(route('instructors.destroy',$item->id)); ?>"
+                                   class="btn btn-danger btn-circle btn-sm"><i class="fa fa-trash text-white"></i>
+                                </a>
+                            </td>
+
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
@@ -84,7 +85,7 @@
 
     </div>
     <!-- Modal to edit record -->
-       
+
 
 
 

@@ -2,7 +2,6 @@
 <?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-2 mb-2"><span class="text-muted fw-light">Academic /</span> Category</h4>
-
         <!-- DataTable with Buttons -->
         <div class="card">
             <div class="card-header py-3 d-flex align-items-center justify-content-between">

@@ -32,7 +32,7 @@ use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Route;
 
 //admin authentication system
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => ''], function () {
     //admin authentication system
     Route::get('logon', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('logon', [AdminLoginController::class, 'login']);
@@ -186,6 +186,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/order/list',[OrderController::class, 'index'])->name('order.index');
         Route::get('/order/pending/{id}',[OrderController::class, 'pending'])->name('order.pending');
         Route::get('/order/confirm/{id}',[OrderController::class, 'confirm'])->name('order.confirm');
+
+        Route::get('/status/inactive/{id}',[InstructorController::class, 'inactive'])->name('instructor.inactive');
+        Route::get('/status/active/{id}',[InstructorController::class, 'active'])->name('instructor.active');
 
     });
 });

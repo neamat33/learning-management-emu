@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function index(){
-        $orders = Order::latest()->paginate(2);
+        $orders = Order::latest()->paginate(20);
         return view('admin.order.index',compact('orders'));
     }
     public function pending($id){
