@@ -22,7 +22,7 @@ Route::get('clear', function () {
 });
 //web route
 Route::get('/', [\App\Http\Controllers\FrontendController::class, 'index'])->name('home.index');
-Route::get('/courses', [\App\Http\Controllers\FrontendController::class, 'coursePage'])->name('frontend.course.page');
+Route::get('/courses/page', [\App\Http\Controllers\FrontendController::class, 'coursePage'])->name('frontend.course.page');
 Route::get('/about-us', [\App\Http\Controllers\FrontendController::class, 'aboutUs'])->name('frontend.about.page');
 Route::get('/contact-us', [\App\Http\Controllers\FrontendController::class, 'contactUs'])->name('frontend.contact.page');
 Route::get('/course/details/{id}', [\App\Http\Controllers\FrontendController::class, 'courseDetailsPage'])->name('course.details.page');

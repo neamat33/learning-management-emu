@@ -1,6 +1,5 @@
-@extends('admin.layouts.app')
-@section('page-title', 'Class List')
-@section('content')
+<?php $__env->startSection('page-title', 'Class List'); ?>
+<?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-2 mb-2"><span class="text-muted fw-light">Academic /</span> Class</h4>
 
@@ -25,29 +24,29 @@
                     </thead>
                     <tbody>
 
-                        @foreach($classes as $key=>$item)
+                        <?php $__currentLoopData = $classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td>{{ ++$key }}</td>
-                            <td>{{ $item->class_name}}</td>
-                            <td>{{ $item->branch_name}}</td>
+                            <td><?php echo e(++$key); ?></td>
+                            <td><?php echo e($item->class_name); ?></td>
+                            <td><?php echo e($item->branch_name); ?></td>
                             <td>
-                                @if ($item->status_id == 1)
-                                    <a href="{{route('class.inactive',$item->id)}}" class="badge bg-success set-status"  title="change to InActive">Active</a>
-                                @else
-                                    <a href="{{route('class.active',$item->id)}}" class="badge bg-danger" title="change to active">Inactive</a>
-                                @endif
+                                <?php if($item->status_id == 1): ?>
+                                    <a href="<?php echo e(route('class.inactive',$item->id)); ?>" class="badge bg-success set-status"  title="change to InActive">Active</a>
+                                <?php else: ?>
+                                    <a href="<?php echo e(route('class.active',$item->id)); ?>" class="badge bg-danger" title="change to active">Inactive</a>
+                                <?php endif; ?>
                             </td>
                             <td>
-                                <a data-id="{{ $item->id}}" data-bs-toggle="modal" data-bs-target="#EditModal"
+                                <a data-id="<?php echo e($item->id); ?>" data-bs-toggle="modal" data-bs-target="#EditModal"
                                 class="btn btn-primary btn-circle btn-sm editBtn">
                                 <i class="fa fa-edit text-white"></i>
                                  </a>
-                                <a href="{{route('class.delete',$item->id)}}" class="btn btn-danger btn-circle btn-sm editBtn">
+                                <a href="<?php echo e(route('class.delete',$item->id)); ?>" class="btn btn-danger btn-circle btn-sm editBtn">
                                     <i class="fa fa-trash text-white"></i>
                                 </a>
                             </td>
                         </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </div>
@@ -60,8 +59,8 @@
                     <div class="modal-header">
                         <h5 class="modal-title">Add Class</h5>
                     </div>
-                    <form action="{{ route('classes.store') }}" method="POST">
-                        @csrf
+                    <form action="<?php echo e(route('classes.store')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">Name</label>
@@ -71,9 +70,9 @@
                                 <label for="">Branch Name</label>
                                 <select name="branch_id" class="form-select">
                                     <option value="">Select</option>
-                                    @foreach($branch as $value)
-                                        <option value="{{$value->id}}">{{ $value->branch_name }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($value->id); ?>"><?php echo e($value->branch_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
@@ -96,8 +95,8 @@
                         <h5 class="modal-title">Edit Occupation</h5>
                     </div>
                     <form id="update-form" method="POST">
-                        @csrf
-                        @method('PUT')
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('PUT'); ?>
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">Name</label>
@@ -107,9 +106,9 @@
                                 <label for="">Branch Name</label>
                                 <select name="branch_id" id="branch_id" class="form-select">
                                     <option value="">Select</option>
-                                    @foreach($branch as $value)
-                                        <option value="{{$value->id}}">{{ $value->branch_name }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($value->id); ?>"><?php echo e($value->branch_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
 
@@ -131,7 +130,7 @@
                 let id = $(this).data("id");
                 $.ajax({
                     type: 'GET',
-                    url: "{{ url('admin/class_edit') }}",
+                    url: "<?php echo e(url('admin/class_edit')); ?>",
                     data: {
                         id: id
                     },
@@ -140,7 +139,7 @@
                         $('#branch_id').val(data.branch_id);
                         var id = data.id;
                         // Replace this with actual dynamic ID value
-                        var formActionUrl = "{{ url('admin/class/update') }}/" + id;
+                        var formActionUrl = "<?php echo e(url('admin/class/update')); ?>/" + id;
                         $('#update-form').attr('action', formActionUrl);
                     },
                 });
@@ -149,4 +148,6 @@
 
         </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/admin/class/list.blade.php ENDPATH**/ ?>

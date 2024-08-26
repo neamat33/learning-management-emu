@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use App\Services\BranchService;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class BranchController extends Controller
     public function index()
     {
         $branch = $this->BranchService->get();
-        $data['branch'] = $branch->get(); 
+        $data['branch'] = $branch->get();
 
         return view('admin.branch.list', $data);
     }
@@ -63,4 +64,18 @@ class BranchController extends Controller
             return redirect()->route('branch.index')->with('error', $error_message);
         }
     }
+
+    public function inactive($id){
+        $data = Branch::where('id',$id)->first();
+        $data->status_id = 0;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+    public function active($id){
+        $data = Branch::where('id',$id)->first();
+        $data->status_id = 1;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+
 }

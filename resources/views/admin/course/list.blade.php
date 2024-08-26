@@ -9,8 +9,8 @@
                     <div class="form-group col-md-6">
                         <input type="text" name="name" class="form-control" placeholder="Course Name" value="{{ request('name') }}">
                     </div>
-    
-                    
+
+
                     <div class="form-row col-md-3">
                         <div class="form-group float-right">
                             <button class="btn btn-primary" type="submit">
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </form>
         </div>
         <!-- DataTable with Buttons -->
@@ -46,39 +46,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                         @foreach($courses as $key=>$item)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td><img src="{{ asset($item->image)}}" alt="" width="80" height="80"></td>
+                            <td><img src="{{ asset($item->image)}}" alt="" width="50" height="50" style="border-radius: 5px"></td>
                             <td>{{ $item->course_title}}</td>
                             <td>{{ $item->start_date}}</td>
                             <td>{{ $item->price}}</td>
                             <td>{{ $item->category->name}}</td>
                             <td>
-                                        
                                 @if ($item->status == 1)
-                                    <span class="badge bg-success set-status" id="status_{{ $item->id }}"
-                                        onclick="setActive({{ $item->id}})">Active</span>
+                                    <a href="{{route('course.inactive',$item->id)}}" class="badge bg-success set-status"  title="change to InActive">Active</a>
                                 @else
-                                    <span class="badge bg-danger set-status" id="status_{{ $item->id }}"
-                                        onclick="setActive({{ $item->id}})">Inactive</span>
+                                    <a href="{{route('course.active',$item->id)}}" class="badge bg-danger" title="change to active">Inactive</a>
                                 @endif
-
                             </td>
-                            {{-- <td>
-                                <a href="{{ route('courses.edit',$item->id) }}" 
-                                class="btn btn-primary btn-circle btn-sm"><i class="fa fa-edit text-white"></i>
-                                </a>
-                            </td> --}}
                             <td>
+{{--                                <a href="{{ route('courses.edit',$item->id) }}"--}}
+{{--                                   class="btn btn-primary btn-circle btn-sm"><i class="fa fa-edit text-white"></i>--}}
+{{--                                </a>--}}
                                 @can('delete-course')
                                 <a class="btn btn-sm btn-danger" href="" data-bs-toggle="modal" data-bs-target=".delete-modal" onclick="handle({{ $item->id }})"><i class="fas fa-trash"></i>
                                 </a>
-    
                                 @endcan
                             </td>
-                            
+
                         </tr>
                         @endforeach
                     </tbody>
@@ -90,9 +83,9 @@
         </div>
 
     </div>
-   
 
-    
+
+
 @include('admin.layouts.delete-modal')
 
 @endsection

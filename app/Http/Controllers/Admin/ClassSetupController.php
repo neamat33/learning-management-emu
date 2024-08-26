@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassSetup;
 use Illuminate\Http\Request;
 use App\Services\ClassSetupService;
 use App\Services\BranchService;
@@ -98,5 +99,18 @@ class ClassSetupController extends Controller
             $error_message = $e->getMessage();
             return redirect()->route('class_settings.index')->with('error', $error_message);
         }
+    }
+
+    public function inactive($id){
+        $data = ClassSetup::where('id',$id)->first();
+        $data->status_id = 0;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+    public function active($id){
+        $data = ClassSetup::where('id',$id)->first();
+        $data->status_id = 1;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
     }
 }

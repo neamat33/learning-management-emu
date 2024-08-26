@@ -21,10 +21,9 @@ class ClassSetupService
       ->leftJoin('academic_branch as ab', 'ab.id', 'acs.branch_id')
       ->leftJoin('academic_class as ac', 'ac.id', 'acs.class_id')
       ->leftJoin('academic_section as sec', 'sec.id', 'acs.section_id')
-      ->where('acs.status_id', 1)
       ->groupBy('acs.class_id','acs.status_id','ab.branch_name','ab.id');
 
-            
+
     }
     public function add($data,$section){
        return DB::table('academic_class_settings')->insert([
@@ -32,7 +31,7 @@ class ClassSetupService
             'branch_id'=>$data['branch_id'],
             'section_id'=> $section,
             'status_id'=> 1,
-        ]);        
+        ]);
     }
 
     public function edit($branch_id,$id)
@@ -44,7 +43,7 @@ class ClassSetupService
           DB::raw('br.branch_name'),
           DB::raw('acs.class_id'),
           DB::raw('ac.class_name'),
-         
+
           DB::raw('GROUP_CONCAT(DISTINCT acs.section_id ORDER BY acs.section_id SEPARATOR ",") as section_id')
       )
       ->leftJoin('academic_branch as br','acs.branch_id','br.id')
@@ -54,18 +53,18 @@ class ClassSetupService
       ->where('acs.branch_id', $branch_id)
       ->groupBy('acs.class_id','acs.branch_id','br.branch_name','ac.class_name')
       ->first();
-            
+
     }
 
     public function update($branch_id,$class_id){
         return DB::table('academic_class_settings')->where('class_id',$class_id)->where('branch_id',$branch_id)->update([
             'status_id'=> 0,
         ]);
-        
+
     }
     public function delete($id){
-        DB::table('academic_class_settings')->where('id', $id)->update([
-            'status_id' => '2',
-        ]);
+
+        DB::table('academic_class_settings')->where('id', $id)->delete();
+
     }
 }

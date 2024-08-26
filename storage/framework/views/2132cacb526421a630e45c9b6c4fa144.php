@@ -28,11 +28,9 @@
                             <td><?php echo e($item->name); ?></td>
                             <td>
                                 <?php if($item->status == 1): ?>
-                                    <span class="badge bg-success set-status" id="status_<?php echo e($item->id); ?>"
-                                        onclick="setActive(<?php echo e($item->id); ?>)">Active</span>
+                                    <a href="<?php echo e(route('category.inactive',$item->id)); ?>" class="badge bg-success set-status"  title="change to InActive">Active</a>
                                 <?php else: ?>
-                                    <span class="badge bg-danger set-status" id="status_<?php echo e($item->id); ?>"
-                                        onclick="setActive(<?php echo e($item->id); ?>)">Inactive</span>
+                                    <a href="<?php echo e(route('category.active',$item->id)); ?>" class="badge bg-danger" title="change to active">Inactive</a>
                                 <?php endif; ?>
 
                             </td>

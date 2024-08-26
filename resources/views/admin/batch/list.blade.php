@@ -24,27 +24,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                         @foreach($batch as $key=>$item)
                         <tr>
                             <td>{{ ++$key }}</td>
                             <td>{{ $item->batch_name}}</td>
                             <td>{{ $item->branch_name}}</td>
                             <td>
-                                        
                                 @if ($item->status_id == 1)
-                                    <span class="badge bg-success set-status" id="status_{{ $item->id}}"
-                                        onclick="setActive({{ $item->id}})">Active</span>
+                                    <a href="{{route('batch.inactive',$item->id)}}" class="badge bg-success set-status"  title="change to InActive">Active</a>
                                 @else
-                                    <span class="badge bg-danger set-status" id="status_{{ $item->id}}"
-                                        onclick="setActive({{ $item->id}})">Inactive</span>
+                                    <a href="{{route('batch.active',$item->id)}}" class="badge bg-danger" title="change to active">Inactive</a>
                                 @endif
-
                             </td>
-                            <td><a data-id="{{ $item->id}}" data-bs-toggle="modal" data-bs-target="#EditModal"
-                                class="btn btn-primary btn-circle btn-sm editBtn">
-                                <i class="fa fa-edit text-white"></i>
-                            </a></td>
+                            <td>
+                               <a data-id="{{ $item->id}}" data-bs-toggle="modal" data-bs-target="#EditModal"
+                                    class="btn btn-primary btn-circle btn-sm editBtn">
+                                    <i class="fa fa-edit text-white"></i>
+                                </a>
+                                <a href="{{route('batch.delete',$item->id)}}" class="btn btn-danger btn-circle btn-sm editBtn">
+                                    <i class="fa fa-trash text-white"></i>
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -111,7 +112,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            
+
                         </div>
 
                         <div class="modal-footer">
@@ -125,7 +126,7 @@
 
         <script>
             $(function(){
-                
+
                  $(document).on('click', '.editBtn', function() {
                 let id = $(this).data("id");
                 $.ajax({
@@ -138,7 +139,7 @@
                         console.log(data)
                         $('#batch_name').val(data.batch_name);
                         $('#branch_id').val(data.branch_id);
-                        var id = data.id; 
+                        var id = data.id;
                         // Replace this with actual dynamic ID value
                         var formActionUrl = "{{ route('batches.update', ':id') }}".replace(':id', id);
                         $('#update-form').attr('action', formActionUrl);
@@ -146,7 +147,7 @@
                 });
             });
             })
-            
+
         </script>
 
 @endsection

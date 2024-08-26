@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicSection;
 use Illuminate\Http\Request;
 use App\Services\SectionService;
 use App\Services\BranchService;
@@ -21,7 +22,7 @@ class SectionController extends Controller
         $branch = (new BranchService)->get();
         $section = $this->SectionService->get();
 
-        if(session('role_id')==1){ 
+        if(session('role_id')==1){
             $data['section'] = $section->get();
             $data['branch'] = $branch->get();
         }else{
@@ -71,4 +72,17 @@ class SectionController extends Controller
             return redirect()->route('sections.index')->with('error', $error_message);
         }
     }
+    public function inactive($id){
+        $data = AcademicSection::where('id',$id)->first();
+        $data->status_id = 0;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+    public function active($id){
+        $data = AcademicSection::where('id',$id)->first();
+        $data->status_id = 1;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+
 }

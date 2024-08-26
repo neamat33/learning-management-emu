@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Shift;
 use Illuminate\Http\Request;
 use App\Services\ShiftService;
 use App\Services\BranchService;
@@ -21,7 +22,7 @@ class ShiftController extends Controller
         $branch = (new BranchService)->get();
         $shift = $this->ShiftService->get();
 
-        if(session('role_id')==1){ 
+        if(session('role_id')==1){
             $data['shift'] = $shift->get();
             $data['branch'] = $branch->get();
         }else{
@@ -70,5 +71,18 @@ class ShiftController extends Controller
             $error_message = $e->getMessage();
             return redirect()->route('shifts.index')->with('error', $error_message);
         }
+    }
+
+    public function inactive($id){
+        $data = Shift::where('id',$id)->first();
+        $data->status_id = 0;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+    public function active($id){
+        $data = Shift::where('id',$id)->first();
+        $data->status_id = 1;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
     }
 }

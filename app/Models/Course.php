@@ -12,9 +12,10 @@ class Course extends Model
     public function items(){
         return $this->hasMany(CourseSubject::class);
     }
+
     public function category(){
         return $this->belongsTo(Category::class, 'category_id');
     }
-    
+
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicClass;
 use Illuminate\Http\Request;
 use App\Services\ClassService;
 use App\Services\BranchService;
@@ -21,7 +22,7 @@ class ClassController extends Controller
         $branch = (new BranchService)->get();
         $class = $this->ClassService->get();
 
-        if(session('role_id')==1){ 
+        if(session('role_id')==1){
             $data['classes'] = $class->get();
             $data['branch'] = $branch->get();
         }else{
@@ -70,5 +71,17 @@ class ClassController extends Controller
             $error_message = $e->getMessage();
             return redirect()->route('classes.index')->with('error', $error_message);
         }
+    }
+    public function inactive($id){
+        $data = AcademicClass::where('id',$id)->first();
+        $data->status_id = 0;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+    public function active($id){
+        $data = AcademicClass::where('id',$id)->first();
+        $data->status_id = 1;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
     }
 }

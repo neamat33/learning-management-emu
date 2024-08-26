@@ -1,24 +1,25 @@
-@extends('admin.layouts.app')
-@section('page-title', 'Designation List')
-@section('content')
+<?php $__env->startSection('page-title', 'Designation List'); ?>
+<?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-2 mb-2"><span class="text-muted fw-light">Academic /</span> Branch</h4>
 
-                @if (session('success'))
+                <?php if(session('success')): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Success!</strong> {{ session('success') }}
+                        <strong>Success!</strong> <?php echo e(session('success')); ?>
+
                         <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                @elseif (session('error'))
+                <?php elseif(session('error')): ?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Error!</strong> {{ session('error') }}
+                        <strong>Error!</strong> <?php echo e(session('error')); ?>
+
                         <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                @endif
+                <?php endif; ?>
         <!-- DataTable with Buttons -->
         <div class="card">
             <div class="card-header py-3 d-flex align-items-center justify-content-between">
@@ -40,29 +41,29 @@
                     </thead>
                     <tbody>
 
-                        @foreach($branch as $key=>$item)
+                        <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td>{{ ++$key }}</td>
-                            <td>{{ $item->branch_name}}</td>
-                            <td>{{ $item->branch_address}}</td>
+                            <td><?php echo e(++$key); ?></td>
+                            <td><?php echo e($item->branch_name); ?></td>
+                            <td><?php echo e($item->branch_address); ?></td>
                             <td>
-                                @if ($item->status_id == 1)
-                                    <a href="{{route('branch.inactive',$item->id)}}" class="badge bg-success set-status"  title="change to InActive">Active</a>
-                                @else
-                                    <a href="{{route('branch.active',$item->id)}}" class="badge bg-danger" title="change to active">Inactive</a>
-                                @endif
+                                <?php if($item->status_id == 1): ?>
+                                    <a href="<?php echo e(route('branch.inactive',$item->id)); ?>" class="badge bg-success set-status"  title="change to InActive">Active</a>
+                                <?php else: ?>
+                                    <a href="<?php echo e(route('branch.active',$item->id)); ?>" class="badge bg-danger" title="change to active">Inactive</a>
+                                <?php endif; ?>
                             </td>
-                            <td><a data-id="{{ $item->id}}" data-bs-toggle="modal" data-bs-target="#EditModal"
+                            <td><a data-id="<?php echo e($item->id); ?>" data-bs-toggle="modal" data-bs-target="#EditModal"
                                 class="btn btn-primary btn-circle btn-sm editBtn">
                                 <i class="fa fa-edit text-white"></i>
                             </a>
-                                <a href="{{route('branch.delete',$item->id)}}" class="btn btn-danger btn-circle btn-sm editBtn">
+                                <a href="<?php echo e(route('branch.delete',$item->id)); ?>" class="btn btn-danger btn-circle btn-sm editBtn">
                                     <i class="fa fa-trash text-white"></i>
                                 </a>
 
                             </td>
                         </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </div>
@@ -75,8 +76,8 @@
                     <div class="modal-header">
                         <h5 class="modal-title">Add Branch</h5>
                     </div>
-                    <form action="{{ route('branch.store') }}" method="POST">
-                        @csrf
+                    <form action="<?php echo e(route('branch.store')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">Branch Name</label>
@@ -108,8 +109,8 @@
                         <h5 class="modal-title">Edit Branch</h5>
                     </div>
                     <form id="update-form" method="POST">
-                        @csrf
-                        @method('PUT')
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('PUT'); ?>
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">Branch Name</label>
@@ -138,7 +139,7 @@
                 let id = $(this).data("id");
                 $.ajax({
                     type: 'GET',
-                    url: "{{ url('admin/branch_edit') }}",
+                    url: "<?php echo e(url('admin/branch_edit')); ?>",
                     data: {
                         id: id
                     },
@@ -147,7 +148,7 @@
                         $('#branch_address').val(data.branch_address);
                         var id = data.id;
                         // Replace this with actual dynamic ID value
-                        let formActionUrl = "{{ route('branch.update', ':id') }}";
+                        let formActionUrl = "<?php echo e(route('branch.update', ':id')); ?>";
                         formActionUrl = formActionUrl.replace(':id', id);
                         $('#update-form').attr('action', formActionUrl);
 
@@ -158,4 +159,6 @@
 
         </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/admin/branch/list.blade.php ENDPATH**/ ?>

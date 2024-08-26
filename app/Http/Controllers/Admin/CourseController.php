@@ -29,8 +29,7 @@ class CourseController extends Controller
         if ($request->name) {
             $course = $course->where('course_title', 'like', '%' . $request->name . '%');
         }
-
-        $courses = $course->where('status', 1)->paginate(20);
+        $courses = $course->latest()->paginate(20);
 
 
         return view('admin.course.list', compact('courses'));
@@ -104,6 +103,9 @@ class CourseController extends Controller
 
     public function edit($id)
     {
+      return  $course = Course::with(['items.subject','items.chapter'])->find($id);
+
+
         $branch = (new BranchService)->get();
         $class = (new ClassService)->get();
         $shift = (new ShiftService)->get();
@@ -171,4 +173,18 @@ class CourseController extends Controller
         $student_id = $request->student_id;
         return $student = $this->StudentService->getStudent($student_id);
     }
+
+    public function inactive($id){
+        $data = Course::where('id',$id)->first();
+        $data->status = 0;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+    public function active($id){
+        $data = Course::where('id',$id)->first();
+        $data->status = 1;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+
 }

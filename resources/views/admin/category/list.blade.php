@@ -29,11 +29,9 @@
                             <td>{{ $item->name}}</td>
                             <td>
                                 @if ($item->status == 1)
-                                    <span class="badge bg-success set-status" id="status_{{ $item->id}}"
-                                        onclick="setActive({{ $item->id}})">Active</span>
+                                    <a href="{{route('category.inactive',$item->id)}}" class="badge bg-success set-status"  title="change to InActive">Active</a>
                                 @else
-                                    <span class="badge bg-danger set-status" id="status_{{ $item->id}}"
-                                        onclick="setActive({{ $item->id}})">Inactive</span>
+                                    <a href="{{route('category.active',$item->id)}}" class="badge bg-danger" title="change to active">Inactive</a>
                                 @endif
 
                             </td>

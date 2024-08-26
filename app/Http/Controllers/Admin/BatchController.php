@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicBatch;
+use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use App\Services\BatchService;
 use App\Services\BranchService;
@@ -21,7 +23,7 @@ class BatchController extends Controller
         $branch = (new BranchService)->get();
         $batch = $this->BatchService->get();
 
-        if(session('role_id')==1){ 
+        if(session('role_id')==1){
             $data['batch'] = $batch->get();
             $data['branch'] = $branch->get();
         }else{
@@ -71,4 +73,18 @@ class BatchController extends Controller
             return back()->with('error', $error_message);
         }
     }
+
+    public function inactive($id){
+        $data = AcademicBatch::where('id',$id)->first();
+        $data->status_id = 0;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+    public function active($id){
+        $data = AcademicBatch::where('id',$id)->first();
+        $data->status_id = 1;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+
 }

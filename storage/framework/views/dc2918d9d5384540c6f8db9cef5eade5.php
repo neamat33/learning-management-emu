@@ -1,6 +1,5 @@
-@extends('admin.layouts.app')
-@section('page-title', 'Assign Subject')
-@section('content')
+<?php $__env->startSection('page-title', 'Assign Subject'); ?>
+<?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-2 mb-2"><span class="text-muted fw-light">Academic /</span> Assign Subject</h4>
 
@@ -25,31 +24,32 @@
                     </thead>
                     <tbody>
 
-                        @foreach($subject_assign as $key=>$item)
+                        <?php $__currentLoopData = $subject_assign; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td>{{ ++$key }}</td>
-                            <td>{{ $item->branch_name }}</td>
-                            <td>{{ $item->class_name }}</td>
-                            <td>{{ $item->subject_name }}</td>
+                            <td><?php echo e(++$key); ?></td>
+                            <td><?php echo e($item->branch_name); ?></td>
+                            <td><?php echo e($item->class_name); ?></td>
+                            <td><?php echo e($item->subject_name); ?></td>
                             <td>
-                                @if ($item->status_id == 1)
-                                    <a href="{{route('subject_assign.inactive',$item->id)}}" class="badge bg-success set-status"  title="change to InActive">Active</a>
-                                @else
-                                    <a href="{{route('subject_assign.active',$item->id)}}" class="badge bg-danger" title="change to active">Inactive</a>
-                                @endif
+                                <?php if($item->status_id == 1): ?>
+                                    <a href="<?php echo e(route('subject_assign.inactive',$item->id)); ?>" class="badge bg-success set-status"  title="change to InActive">Active</a>
+                                <?php else: ?>
+                                    <a href="<?php echo e(route('subject_assign.active',$item->id)); ?>" class="badge bg-danger" title="change to active">Inactive</a>
+                                <?php endif; ?>
+
                             </td>
                             <td>
-                                <a href="{{ url('admin/subject_assign_edit')}}/{{ $item->id }}/{{$item->class_id}}"
+                                <a href="<?php echo e(url('admin/subject_assign_edit')); ?>/<?php echo e($item->id); ?>/<?php echo e($item->class_id); ?>"
                                     class="btn btn-primary btn-circle btn-sm editBtn">
                                     <i class="fa fa-edit text-white"></i>
                                 </a>
 
-                                <a href="{{route('subject_assign.delete',$item->id)}}" class="btn btn-danger btn-circle btn-sm editBtn">
+                                <a href="<?php echo e(route('subject_assign.delete',$item->id)); ?>" class="btn btn-danger btn-circle btn-sm editBtn">
                                     <i class="fa fa-trash text-white"></i>
                                 </a>
                             </td>
                         </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </div>
@@ -62,8 +62,8 @@
                     <div class="modal-header">
                         <h5 class="modal-title">Assign Subject</h5>
                     </div>
-                    <form action="{{ route('subject_assign.store') }}" method="POST">
-                        @csrf
+                    <form action="<?php echo e(route('subject_assign.store')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                         <div class="modal-body">
 
                             <div class="form-group">
@@ -71,25 +71,25 @@
 
                                 <select name="branch_id" class="form-select">
                                     <option value="">Select</option>
-                                    @foreach($branch as $value)
-                                        <option value="{{$value->id}}">{{ $value->branch_name }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($value->id); ?>"><?php echo e($value->branch_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for=""><b>Class Name</b></label><br>
                                 <select name="class_id" class="form-select">
                                     <option value="">Select</option>
-                                    @foreach($classes as $class)
-                                        <option value="{{$class->id}}">{{ $class->class_name }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $class): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($class->id); ?>"><?php echo e($class->class_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for=""><b> Subject Name </b></label> <br>
-                                @foreach($subjects as $subject)
-                                    <input name="subject_id[]" type="checkbox" value="{{ $subject->id}}"> &nbsp; {{ $subject->subject_name }} <br>
-                                @endforeach
+                                <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <input name="subject_id[]" type="checkbox" value="<?php echo e($subject->id); ?>"> &nbsp; <?php echo e($subject->subject_name); ?> <br>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                             </div>
 
@@ -113,8 +113,8 @@
                         <h5 class="modal-title">Edit Occupation</h5>
                     </div>
                     <form id="update-form" method="POST">
-                        @csrf
-                        @method('PUT')
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('PUT'); ?>
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">Name</label>
@@ -132,9 +132,9 @@
                                 <label for="">Branch Name</label>
                                 <select id="branch_id" name="branch_id" class="form-select">
                                     <option value="">Select</option>
-                                    @foreach($branch as $value)
-                                        <option value="{{$value->id}}">{{ $value->branch_name }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($value->id); ?>"><?php echo e($value->branch_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
 
@@ -156,7 +156,7 @@
                 let id = $(this).data("id");
                 $.ajax({
                     type: 'GET',
-                    url: "{{ url('admin/shift_edit') }}",
+                    url: "<?php echo e(url('admin/shift_edit')); ?>",
                     data: {
                         id: id
                     },
@@ -167,7 +167,7 @@
                         $('#branch_id').val(data.branch_id);
                         var id = data.id_assign;
                         // Replace this with actual dynamic ID value
-                        var formActionUrl = "{{ url('admin/shift/update') }}/" + id;
+                        var formActionUrl = "<?php echo e(url('admin/shift/update')); ?>/" + id;
                         $('#update-form').attr('action', formActionUrl);
                     },
                 });
@@ -176,4 +176,6 @@
 
         </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/admin/subject_assign/list.blade.php ENDPATH**/ ?>

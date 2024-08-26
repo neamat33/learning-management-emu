@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('page-title', 'Course List'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -9,8 +8,8 @@
                     <div class="form-group col-md-6">
                         <input type="text" name="name" class="form-control" placeholder="Course Name" value="<?php echo e(request('name')); ?>">
                     </div>
-    
-                    
+
+
                     <div class="form-row col-md-3">
                         <div class="form-group float-right">
                             <button class="btn btn-primary" type="submit">
@@ -21,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </form>
         </div>
         <!-- DataTable with Buttons -->
@@ -46,35 +45,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                         <?php $__currentLoopData = $courses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td><?php echo e(++$key); ?></td>
-                            <td><img src="<?php echo e(asset($item->image)); ?>" alt="" width="80" height="80"></td>
+                            <td><img src="<?php echo e(asset($item->image)); ?>" alt="" width="50" height="50" style="border-radius: 5px"></td>
                             <td><?php echo e($item->course_title); ?></td>
                             <td><?php echo e($item->start_date); ?></td>
                             <td><?php echo e($item->price); ?></td>
                             <td><?php echo e($item->category->name); ?></td>
                             <td>
-                                        
                                 <?php if($item->status == 1): ?>
-                                    <span class="badge bg-success set-status" id="status_<?php echo e($item->id); ?>"
-                                        onclick="setActive(<?php echo e($item->id); ?>)">Active</span>
+                                    <a href="<?php echo e(route('course.inactive',$item->id)); ?>" class="badge bg-success set-status"  title="change to InActive">Active</a>
                                 <?php else: ?>
-                                    <span class="badge bg-danger set-status" id="status_<?php echo e($item->id); ?>"
-                                        onclick="setActive(<?php echo e($item->id); ?>)">Inactive</span>
+                                    <a href="<?php echo e(route('course.active',$item->id)); ?>" class="badge bg-danger" title="change to active">Inactive</a>
                                 <?php endif; ?>
-
                             </td>
-                            
                             <td>
+                                <a href="<?php echo e(route('courses.edit',$item->id)); ?>"
+                                   class="btn btn-primary btn-circle btn-sm"><i class="fa fa-edit text-white"></i>
+                                </a>
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete-course')): ?>
                                 <a class="btn btn-sm btn-danger" href="" data-bs-toggle="modal" data-bs-target=".delete-modal" onclick="handle(<?php echo e($item->id); ?>)"><i class="fas fa-trash"></i>
                                 </a>
-    
                                 <?php endif; ?>
                             </td>
-                            
+
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
@@ -87,9 +83,9 @@
         </div>
 
     </div>
-   
 
-    
+
+
 <?php echo $__env->make('admin.layouts.delete-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->stopSection(); ?>
@@ -110,4 +106,5 @@
 
 </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/admin/course/list.blade.php ENDPATH**/ ?>

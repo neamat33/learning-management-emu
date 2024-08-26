@@ -94,7 +94,7 @@ Route::group(['prefix' => ''], function () {
         Route::resource('classes',ClassController::class);
         Route::get('class_edit',[ClassController::class,'edit']);
         Route::put('class/update/{id}',[ClassController::class,'update']);
-        Route::get('classes/delete/{id}', [ClassController::class,'destroy'])->name('classes.delete');
+        Route::get('classes/delete/{id}', [ClassController::class,'destroy'])->name('class.delete');
         //class Setup
         Route::get('class-setup',[ClassSetupController::class,'index'])->name('class_settings.index');
         Route::post('class-setup-save',[ClassSetupController::class,'store'])->name('class_settings.store');
@@ -111,13 +111,13 @@ Route::group(['prefix' => ''], function () {
         Route::get('branch_edit',[BranchController::class,'edit']);
         // Route::post('/save-branch',[BranchController::class,'store'])->name('branch.store');
         // Route::put('update-branch/{id}', [BranchController::class, 'update']);
-        // Route::get('delete-branch/{id}', [BranchController::class, 'destroy']);
+         Route::get('delete-branch/{id}', [BranchController::class, 'destroy'])->name('branch.delete');
         //Section
         Route::get('/academic-section',[SectionController::class,'index'])->name('sections.index');
         Route::post('/save-section',[SectionController::class,'store'])->name('section.store');
         Route::get('section_edit',[SectionController::class,'edit']);
         Route::put('section/update/{id}', [SectionController::class, 'update']);
-        Route::get('delete-section/{id}', [SectionController::class, 'destroy']);
+        Route::get('delete-section/{id}', [SectionController::class, 'destroy'])->name('section.delete');
         //Batch
         Route::resource('batches',BatchController::class);
         Route::resource('monthly-fees-configurations',MonthlyFeeConfigurationController::class);
@@ -127,19 +127,22 @@ Route::group(['prefix' => ''], function () {
         Route::post('/save-shift',[ShiftController::class,'store'])->name('shift.store');
         Route::get('shift_edit',[ShiftController::class,'edit']);
         Route::put('shift/update/{id}', [ShiftController::class, 'update'])->name('update-shift');
-        Route::get('delete-shift/{id}', [ShiftController::class, 'destroy']);
+        Route::get('delete-shift/{id}', [ShiftController::class, 'destroy'])->name('shift.delete');
         //Subject
         Route::get('/academic-subject',[SubjectController::class,'index'])->name('subjects.index');
         Route::post('/save-subject',[SubjectController::class,'store'])->name('subject.store');
         Route::get('subject_edit',[SubjectController::class,'edit']);
         Route::put('subject/update/{id}', [SubjectController::class, 'update']);
-        Route::get('delete-subject/{id}', [SubjectController::class, 'destroy']);
+        Route::get('delete-subject/{id}', [SubjectController::class, 'destroy'])->name('subject.delete');
         //Subject Assign
         Route::get('subject-assign',[SubjectAssignController::class,'index'])->name('subject_assign.index');
         Route::post('subject-assign-save',[SubjectAssignController::class,'store'])->name('subject_assign.store');
         Route::get('subject_assign_edit/{branch_id}/{id}',[SubjectAssignController::class,'edit']);
         Route::put('subject_assign/update/{id}',[SubjectAssignController::class,'update']);
         Route::get('subject_assign/delete/{id}', [SubjectAssignController::class,'destroy'])->name('subject_assign.delete');
+
+        Route::get('/subject_assign/inactive/{id}',[SubjectAssignController::class, 'inactive'])->name('subject_assign.inactive');
+        Route::get('/subject_assign/active/{id}',[SubjectAssignController::class, 'active'])->name('subject_assign.active');
 
         // Students
         Route::resource('students',StudentController::class);
@@ -157,6 +160,13 @@ Route::group(['prefix' => ''], function () {
         Route::resource('instructors',InstructorController::class);
         Route::resource('courses',CourseController::class);
         Route::resource('categories',CategoryController::class);
+
+        Route::get('/category/inactive/{id}',[CategoryController::class, 'inactive'])->name('category.inactive');
+        Route::get('/category/active/{id}',[CategoryController::class, 'active'])->name('category.active');
+
+        Route::get('/course/inactive/{id}',[CourseController::class, 'inactive'])->name('course.inactive');
+        Route::get('/course/active/{id}',[CourseController::class, 'active'])->name('course.active');
+
 
         // Accounts
         Route::resource('accounts',AccountController::class);
@@ -187,8 +197,30 @@ Route::group(['prefix' => ''], function () {
         Route::get('/order/pending/{id}',[OrderController::class, 'pending'])->name('order.pending');
         Route::get('/order/confirm/{id}',[OrderController::class, 'confirm'])->name('order.confirm');
 
-        Route::get('/status/inactive/{id}',[InstructorController::class, 'inactive'])->name('instructor.inactive');
-        Route::get('/status/active/{id}',[InstructorController::class, 'active'])->name('instructor.active');
+        Route::get('/instructor/inactive/{id}',[InstructorController::class, 'inactive'])->name('instructor.inactive');
+        Route::get('/instructor/active/{id}',[InstructorController::class, 'active'])->name('instructor.active');
+
+        Route::get('/section/inactive/{id}',[SectionController::class, 'inactive'])->name('section.inactive');
+        Route::get('/section/active/{id}',[SectionController::class, 'active'])->name('section.active');
+
+        Route::get('/class/inactive/{id}',[ClassController::class, 'inactive'])->name('class.inactive');
+        Route::get('/class/active/{id}',[ClassController::class, 'active'])->name('class.active');
+
+        Route::get('/branch/inactive/{id}',[BranchController::class, 'inactive'])->name('branch.inactive');
+        Route::get('/branch/active/{id}',[BranchController::class, 'active'])->name('branch.active');
+
+        Route::get('/batch/inactive/{id}',[BatchController::class, 'inactive'])->name('batch.inactive');
+        Route::get('/batch/active/{id}',[BatchController::class, 'active'])->name('batch.active');
+        Route::get('/batch/delete/{id}',[BatchController::class, 'destroy'])->name('batch.delete');
+
+        Route::get('/subject/inactive/{id}',[SubjectController::class, 'inactive'])->name('subject.inactive');
+        Route::get('/subject/active/{id}',[SubjectController::class, 'active'])->name('subject.active');
+
+        Route::get('/shift/inactive/{id}',[ShiftController::class, 'inactive'])->name('shift.inactive');
+        Route::get('/shift/active/{id}',[ShiftController::class, 'active'])->name('shift.active');
+
+        Route::get('/class_setup/inactive/{id}',[ClassSetupController::class, 'inactive'])->name('class_setup.inactive');
+        Route::get('/class_setup/active/{id}',[ClassSetupController::class, 'active'])->name('class_setup.active');
 
     });
 });

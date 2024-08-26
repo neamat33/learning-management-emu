@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Services\SubjectService;
 use App\Services\BranchService;
@@ -21,7 +22,7 @@ class SubjectController extends Controller
         $subject = (new SubjectService)->get();
         $subject = $this->SubjectService->get();
 
-        if(session('role_id')==1){ 
+        if(session('role_id')==1){
             $data['subject'] = $subject->get();
         }else{
             $data['subject'] = $subject->where('branch_id',session('branch_id'))->get();
@@ -69,5 +70,19 @@ class SubjectController extends Controller
             $error_message = $e->getMessage();
             return redirect()->route('subjects.index')->with('error', $error_message);
         }
+    }
+
+
+    public function inactive($id){
+        $data = Subject::where('id',$id)->first();
+        $data->status_id = 0;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+    public function active($id){
+        $data = Subject::where('id',$id)->first();
+        $data->status_id = 1;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
     }
 }

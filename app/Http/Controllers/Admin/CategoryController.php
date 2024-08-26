@@ -67,4 +67,22 @@ class CategoryController extends Controller
             return redirect()->route('categories.index')->with('error', $error_message);
         }
     }
+
+
+    public function inactive($id){
+        $data = Category::where('id',$id)->first();
+        $data->status = 0;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+    public function active($id){
+        $data = Category::where('id',$id)->first();
+        $data->status = 1;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+
+
+
+
 }

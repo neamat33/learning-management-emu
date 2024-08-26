@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\SubjectAssign;
 use Illuminate\Http\Request;
 use App\Services\SubjectAssignService;
 use App\Services\BranchService;
@@ -21,13 +22,13 @@ class SubjectAssignController extends Controller
     public function index()
     {
 
-        
+
         $branch = (new BranchService)->get();
         $subject = (new SubjectService)->get();
         $class = (new ClassService)->get();
         $subject_assign = $this->SubjectAssignService->get();
 
-        if(session('role_id')==1){ 
+        if(session('role_id')==1){
             $data['subject_assign'] = $subject_assign->get();
             $data['branch'] = $branch->get();
             $data['subjects'] = $subject->get();
@@ -49,7 +50,7 @@ class SubjectAssignController extends Controller
             foreach($subjects as $subject){
                 $this->SubjectAssignService->add($data,$subject);
             }
-        
+
             return redirect()->route('subject_assign.index')->with('success', ' Assign Successfully');
         } catch (\Exception $e) {
             $error_message = $e->getMessage();
@@ -100,5 +101,18 @@ class SubjectAssignController extends Controller
             $error_message = $e->getMessage();
             return redirect()->route('subject_assign.index')->with('error', $error_message);
         }
+    }
+
+    public function inactive($id){
+        $data = SubjectAssign::where('id',$id)->first();
+        $data->status_id = 0;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
+    }
+    public function active($id){
+        $data = SubjectAssign::where('id',$id)->first();
+        $data->status_id = 1;
+        $data->save();
+        return back()->with('success', 'Status change Successfully!');
     }
 }
