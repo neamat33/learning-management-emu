@@ -45,7 +45,6 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        $request->all();
         $validated = $request->validate([
             'course_title' => 'required|max:128',
             'course_description' => "required",
@@ -74,27 +73,10 @@ class CourseController extends Controller
                 'price'     => $request->price,
                 'discount_price'     => $request->discount_price,
                 'course_description' => $request->course_description,
-
+                'course_details' => json_encode($request->course_details)
             ]);
-
-            if ($course) {
-                foreach ($request->subject as $key => $subjectName) {
-                    $subject = CourseSubject::create([
-                        'course_id' => $course->id,
-                        'subject_id' => $subjectName,
-                        'instructor_id' => $request->instructor[$key],
-                    ]);
-
-                    foreach ($request->chapter[$key] as $chapterName) {
-                        Chapter::create([
-                            'course_subject_id' => $subject->id,
-                            'chapter_name' => $chapterName,
-                        ]);
-                    }
-                }
-            }
             DB::commit();
-            return redirect()->back()->with('success', 'Cousre Created Successfully');
+            return redirect()->back()->with('success', 'Course Created Successfully');
         } catch (\Exception $e) {
             $error_message = $e->getMessage();
             return redirect()->route('courses.create')->with('error', $error_message);
@@ -103,57 +85,78 @@ class CourseController extends Controller
 
     public function edit($id)
     {
-      return  $course = Course::with(['items.subject','items.chapter'])->find($id);
-
-
-        $branch = (new BranchService)->get();
-        $class = (new ClassService)->get();
-        $shift = (new ShiftService)->get();
-        $batch = (new BatchService)->get();
-        $section = (new SectionService)->get();
-
-        if (session('role_id') == 1) {
-            $data['branches'] = $branch->get();
-            $data['classes'] = $class->get();
-            $data['batches'] = $batch->get();
-            $data['shifts'] = $shift->get();
-            $data['sections'] = $section->get();
-        } else {
-            $data['branches'] = $branch->where('id', session('branch_id'))->get();
-            $data['classes'] = $class->where('branch_id', session('branch_id'))->get();
-            $data['batches'] = $batch->where('branch_id', session('branch_id'))->get();
-            $data['shifts'] = $shift->where('branch_id', session('branch_id'))->get();
-            $data['sections'] = $section->where('branch_id', session('branch_id'))->get();
-        }
-
-        $data['student'] = DB::table('student_info')->where('id', $id)->first();
-        $data['assign'] = DB::table('student_class_assignment')->where('student_id', $id)->first();
-        return view('admin.student.edit', $data);
+        $course = Course::findOrFail($id);
+        $subjects = (new SubjectService)->all();
+        $instructors = Instructor::get();
+        $categories = Category::get();
+        return view('admin.course.edit', compact('course','subjects','instructors','categories'));
     }
 
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        $validated = $request->validate([
+            'course_title' => 'required|max:128',
+            'course_description' => "required",
+        ]);
         try {
-            $this->StudentService->update($data, $id);
-
-            $this->StudentService->classAssignmentUpdate($data, $id);
-
-            return redirect()->route('students.index')->with('success', 'Student Update Successfully');
+            DB::beginTransaction();
+            $course = Course::findOrFail($id);
+            if ($request->hasFile('image')) {
+                $item_image = InputHelper::upload($request->image, $this->file_path);
+            } else {
+                $item_image = $course->image;
+            }
+            if ($request->hasFile('class_routine')) {
+                $class_routine = InputHelper::upload($request->class_routine, $this->file_path);
+            } else {
+                $class_routine = $course->class_routine;
+            }
+            $course_details = $request->course_details;
+            if (is_array($course_details)) {
+                if (isset($course_details['chapter']) && is_array($course_details['chapter'])) {
+                    foreach ($course_details['chapter'] as &$chapters) {
+                        if (is_array($chapters)) {
+                            $chapters = array_filter($chapters, function ($value) {
+                                return $value !== null;
+                            });
+                        }
+                    }
+                }
+            }
+            $course->update([
+                'category_id' =>  $request->category_id,
+                'course_title' =>  $request->course_title,
+                'start_date'     => $request->start_date,
+                'image'          => $item_image,
+                'class_routine'  => $class_routine,
+                'video'     => $request->video,
+                'price'     => $request->price,
+                'discount_price'     => $request->discount_price,
+                'course_description' => $request->course_description,
+                'course_details' => json_encode($course_details)
+            ]);
+            DB::commit();
+            return redirect()->back()->with('success', 'Course Update Successfully');
         } catch (\Exception $e) {
             $error_message = $e->getMessage();
-            return back()->with('error', $error_message);
+            return redirect()->back()->with('error', $error_message);
         }
     }
 
     public function destroy($id)
     {
         try {
-            $course = Course::find($id);
-            if ($course->delete()) {
-                $course->items()->delete();
+            $course = Course::findOrFail($id);
+            if ($course->image && file_exists(storage_path('app/public/' . $course->image))) {
+                unlink(public_path('app/public/' . $course->image));
             }
-            return redirect()->route('courses.index')->with('success', 'Deleted successfully');
+
+            if ($course->class_routine && file_exists(storage_path('app/public/' . $course->class_routine))) {
+                unlink(public_path('app/public/' . $course->class_routine));
+            }
+
+            $course->delete();
+            return redirect()->route('courses.index')->with('success', 'Course Deleted Successfully!');
         } catch (\Exception $e) {
             $error_message = $e->getMessage();
             return redirect()->route('courses.index')->with('error', $error_message);

@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('web')); ?>/assets/vendor/stepper/css/bs-stepper.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('web')); ?>/assets/vendor/glightbox/css/glightbox.css">
     <link id="style-switch" rel="stylesheet" type="text/css" href="<?php echo e(asset('web')); ?>/assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <?php echo $__env->yieldPushContent('styles'); ?>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7N7LGGGWT1"></script>
@@ -58,7 +59,7 @@ Footer END -->
 
 <!-- Bootstrap JS -->
 <script src="<?php echo e(asset('web')); ?>/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!-- Vendors -->
 <script src="<?php echo e(asset('web')); ?>/assets/vendor/tiny-slider/tiny-slider.js"></script>
 <script src="<?php echo e(asset('web')); ?>/assets/vendor/glightbox/js/glightbox.js"></script>

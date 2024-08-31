@@ -16,7 +16,6 @@
                     <?php echo csrf_field(); ?>
                     <div class="modal-body ">
                         <div class="row">
-
                             <div class="form-group col-md-4">
                                 <label for=""><b>Course Title </b><span class="text-danger">*</span></label>
                                 <input name="course_title" id="course_title" value="<?php echo e(old('course_title')); ?>"

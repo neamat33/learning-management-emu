@@ -3,13 +3,12 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-2 mb-2"><span class="text-muted fw-light">Academic /</span> Course</h4>
-
         <!-- DataTable with Buttons -->
         <div class="card">
             <div class="card-header py-3 d-flex align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Course Add</h6>
                 <h6 class="m-0 font-weight-bold text-primary"><a href="{{ route('courses.index') }}"
-                        class="btn btn-sm btn-primary"><i class="fa fa-eye"></i>&nbsp; Course List</a></h6>
+                                                                 class="btn btn-sm btn-primary"><i class="fa fa-eye"></i>&nbsp; Course List</a></h6>
             </div>
             <div class="card-body">
 
@@ -21,7 +20,7 @@
                             <div class="form-group col-md-4">
                                 <label for=""><b>Course Title </b><span class="text-danger">*</span></label>
                                 <input name="course_title" id="course_title" value="{{ old('course_title') }}"
-                                    class="form-control mt-2" required />
+                                       class="form-control mt-2" required />
                                 @if ($errors->has('course_title'))
                                     <span class="invalid-feedback">{{ $errors->first('course_title') }}</span>
                                 @endif
@@ -40,7 +39,7 @@
                             <div class="form-group col-md-4">
                                 <label for=""><b>Course Price </b></label>
                                 <input name="price" id="price" value="{{ old('price') }}"
-                                    class="form-control mt-2" />
+                                       class="form-control mt-2" />
                                 @if ($errors->has('price'))
                                     <span class="invalid-feedback">{{ $errors->first('price') }}</span>
                                 @endif
@@ -48,7 +47,7 @@
                             <div class="form-group col-md-4 mt-2">
                                 <label for=""><b>Discount Price </b><span class="text-danger">*</span></label>
                                 <input name="discount_price" id="discount_price" value="{{ old('discount_price') }}"
-                                    class="form-control mt-2" />
+                                       class="form-control mt-2" />
                                 @if ($errors->has('discount_price'))
                                     <span class="invalid-feedback">{{ $errors->first('discount_price') }}</span>
                                 @endif
@@ -57,7 +56,7 @@
                             <div class="form-group col-md-4 mt-2">
                                 <label for=""><b>Start Date </b><span class="text-danger">*</span></label>
                                 <input type="text" name="start_date" id="start_date" value="{{ date('Y-m-d') }}"
-                                    class="form-control mt-2" />
+                                       class="form-control mt-2" />
                                 @if ($errors->has('start_date'))
                                     <span class="invalid-feedback">{{ $errors->first('start_date') }}</span>
                                 @endif
@@ -80,7 +79,7 @@
                             <div class="form-group col-md-8 mt-2">
                                 <label for=""><b>Short Video </b></label>
                                 <input type="text" name="video" id="video" value="{{ old('video') }}"
-                                    class="form-control mt-2" />
+                                       class="form-control mt-2" />
                                 @if ($errors->has('video'))
                                     <span class="invalid-feedback">{{ $errors->first('video') }}</span>
                                 @endif
@@ -88,10 +87,23 @@
 
                             <div class="form-group col-md-12 mt-2">
                                 <label for=""><b>Course Description </b></label>
-                                <textarea name="course_description" class="form-control mt-2" rows="2" required>{{ old('course_description') }}</textarea>
+                                <textarea name="course_description" class="form-control mt-2" rows="14" required>{{ old('course_description') }}</textarea>
                                 @if ($errors->has('course_description'))
                                     <span class="invalid-feedback">{{ $errors->first('course_description') }}</span>
                                 @endif
+                            </div>
+
+                            <div class="form-group col-md-6 mt-2 text-center">
+                                <label for=""><b>Cover Photo</b></label>
+                                <div>
+                                    <img id="image1" src="https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg" style="height: 100px; width: 100px">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 mt-2 text-center">
+                                <label for=""><b>Class Routine (Image)</b></label>
+                                <div>
+                                    <img id="class_routine1" src="https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg" style="height: 100px; width: 100px">
+                                </div>
                             </div>
                         </div>
 
@@ -102,58 +114,56 @@
                             <div class="table-responsive">
                                 <table class="table table-responsive-md mytable">
                                     <thead>
-                                        <tr>
-                                            <th style="width: 30%"><strong>Subject</strong></th>
-                                            <th style="width: 30%"><strong>Instructor</strong></th>
-                                            <th style="width: 40%"><strong>Lesson</strong></th>
-                                        </tr>
+                                    <tr>
+                                        <th style="width: 30%"><strong>Subject</strong></th>
+                                        <th style="width: 30%"><strong>Instructor</strong></th>
+                                        <th style="width: 40%"><strong>Lesson</strong></th>
+                                    </tr>
                                     </thead>
                                     <tbody id="subjectRows">
-                                        <tr class="subject-row">
-                                            <td>
-                                                <select name="subject[]" class="select1 form-control"
+                                    <tr class="subject-row">
+                                        <td>
+                                            <select name="course_details[subject][]" class="select1 form-control"
                                                     style="min-width: 100px" required>
-                                                    <option value="">Select Subject</option>
-                                                    @foreach ($subjects as $val)
-                                                        <option value="{{ $val->id }}">{{ $val->subject_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select name="instructor[]" class="select1 form-control"
+                                                <option value="">Select Subject</option>
+                                                @foreach ($subjects as $val)
+                                                    <option value="{{ $val->id }}">{{ $val->subject_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="course_details[instructor][]" class="select1 form-control"
                                                     style="min-width: 100px" required>
-                                                    <option value="">Select Teacher</option>
-                                                    @foreach ($instructors as $instructor)
-                                                        <option value="{{ $instructor->id }}">{{ $instructor->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="form-group chapter ">
-                                                    <div class="row">
-                                                        <div class="col-9">
-                                                            <input type="text" name="chapter[0][]"
-                                                                   class="form-control mt-1">
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <button type="button"
-                                                                    class="btn btn-sm btn-success mt-2 add-chapter">
-                                                                <i class="fa fa-plus"></i>
-                                                            </button>
-                                                        </div>
+                                                <option value="">Select Teacher</option>
+                                                @foreach ($instructors as $instructor)
+                                                    <option value="{{ $instructor->id }}">{{ $instructor->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="form-group chapter ">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <input type="text" name="course_details[chapter][0][]"
+                                                               class="form-control mt-1">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <button type="button"
+                                                                class="btn btn-sm btn-success mt-2 add-chapter">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <div class="chapter-container"></div>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                            <div class="chapter-container"></div>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-
-
                         <div style="text-align:right">
                             <div class="mt-3">
                                 <p id="select-alert" class="text-danger p-2"></p>
@@ -173,6 +183,24 @@
 
 @endsection
 @section('extra_js')
+    <script>
+        $(document).ready(() => {
+            image.onchange = evt => {
+                const [file] = image.files
+                if (file) {
+                    image1.src = URL.createObjectURL(file)
+                }
+            }
+        });
+        $(document).ready(() => {
+            class_routine.onchange = evt => {
+                const [file] = class_routine.files
+                if (file) {
+                    class_routine1.src = URL.createObjectURL(file)
+                }
+            }
+        });
+    </script>
     <script>
         var jq = $.noConflict();
         jq(document).ready(function() {
@@ -197,26 +225,26 @@
                 let newRow = `
                 <tr class="subject-row">
                     <td>
-                        <select name="subject[]" class="select1 form-control" style="min-width: 100px" required>
+                        <select name="course_details[subject][]" class="select1 form-control" style="min-width: 100px" required>
                             <option value="">Select subject</option>
                             @foreach ($subjects as $val)
-                                <option value="{{ $val->id }}">{{ $val->subject_name }}</option>
+                <option value="{{ $val->id }}">{{ $val->subject_name }}</option>
                             @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select name="instructor[]" class="select1 form-control" style="min-width: 100px" required>
-                            <option value="">Select Teacher</option>
-                            @foreach ($instructors as $instructor)
-                                <option value="{{ $instructor->id }}">{{ $instructor->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
+                </select>
+            </td>
             <td>
-            <div class="form-group chapter">
-                <div class="row align-items-center">
-                    <div class="col-9">
-                        <input type="text" name="chapter[${subjectIndex}][]" class="form-control mt-1">
+                <select name="course_details[instructor][]" class="select1 form-control" style="min-width: 100px" required>
+                    <option value="">Select Teacher</option>
+@foreach ($instructors as $instructor)
+                <option value="{{ $instructor->id }}">{{ $instructor->name }}</option>
+                            @endforeach
+                </select>
+            </td>
+    <td>
+    <div class="form-group chapter">
+        <div class="row align-items-center">
+            <div class="col-9">
+                <input type="text" name="course_details[chapter][${subjectIndex}][]" class="form-control mt-1">
                     </div>
                     <div class="col-3 d-flex">
                         <button type="button" class="btn btn-sm btn-success mt-1 ml-1 add-chapter">
@@ -239,7 +267,7 @@
                 let chapterInput = `
                 <div class="row mt-2">
                     <div class="col-9">
-                        <input type="text" name="chapter[${subjectRowIndex}][]" class="form-control">
+                        <input type="text" name="course_details[chapter][${subjectRowIndex}][]" class="form-control">
                     </div>
                     <div class="col-3">
                         <button type="button" class="btn btn-sm btn-danger remove-chapter">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\Auth\LoginController as StudentLoginController;
@@ -32,6 +33,7 @@ Route::get('/buy/course',[\App\Http\Controllers\FrontendController::class,'cartP
 Route::post('/buy/course/store',[\App\Http\Controllers\FrontendController::class,'storeOrderData'])->name('store.buy.course');
 Route::get('/success',[\App\Http\Controllers\FrontendController::class,'successPage'])->name('success.page');
 
+Route::get('/courses/sort-filter', [FrontendController::class, 'sortAndFilter'])->name('courses.sort.filter');
 
 require('admin.php');
 require('student.php');

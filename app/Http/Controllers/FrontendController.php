@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Chapter;
 use App\Models\Contact;
 use App\Models\Course;
 use App\Models\CourseSubject;
@@ -10,6 +11,7 @@ use App\Models\Instructor;
 use App\Models\NoticeBoard;
 use App\Models\Order;
 use App\Models\Student\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\AssignOp\Concat;
 
@@ -21,14 +23,18 @@ class FrontendController extends Controller
         return view('frontend.index',compact('categories','courses'));
     }
     public function coursePage(){
-         $allCourses = Course::where('status',1)->paginate(16);
+        $allCourses = Course::where('status',1)->paginate(16);
         return view('frontend.courses',compact('allCourses'));
     }
-    public function courseDetailsPage($id){
+    public function courseDetailsPage($id)
+    {
         $course = Course::findOrFail(decrypt($id));
-        $getInstructors = CourseSubject::where('course_id',$course->id)->with('instructor','subject','chapter')->get();
-        return view('frontend.course_details',compact('course','getInstructors'));
+        $courseDetails = json_decode($course->course_details);
+        $instructors = Instructor::whereIn('id', $courseDetails->instructor)->get();
+        $subjects = Subject::whereIn('id', $courseDetails->subject)->get();
+        return view('frontend.course_details', compact('course', 'instructors', 'subjects', 'courseDetails'));
     }
+
     public function aboutUs(){
         $instructors = Instructor::where('status',1)->get();
         return view('frontend.about_us',compact('instructors'));
@@ -38,10 +44,10 @@ class FrontendController extends Controller
     }
 
     public function contactStore(Request $request){
-           $data = new Contact();
-           $data->fill($request->all());
-           $data->save();
-           return back();
+        $data = new Contact();
+        $data->fill($request->all());
+        $data->save();
+        return back();
     }
 
     public function contactMessage(){
@@ -59,20 +65,20 @@ class FrontendController extends Controller
     }
 
     public function cartPage(Request $request){
-          $course = Course::where('id',$request->course_id)->first();
+        $course = Course::where('id',$request->course_id)->first();
 //            $course = Course::where(['id' => $request->course_id, 'status' => 1])->first();
-            if(!$course){
-                return back();
-            }
-          return view('frontend.cart',compact('course'));
+        if(!$course){
+            return back();
+        }
+        return view('frontend.cart',compact('course'));
     }
     public function storeOrderData(Request $request){
-      $request->validate([
-         'name' => 'required',
-          'email' => 'required|unique:students',
-          'phone_number' => 'required|unique:students',
-         'payment_type' => 'required',
-      ]);
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:students',
+            'phone_number' => 'required|unique:students',
+            'payment_type' => 'required',
+        ]);
 
         if ($request->student_id){
             $student = Student::findOrFail($request->student_id);

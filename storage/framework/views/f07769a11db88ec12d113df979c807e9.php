@@ -1,5 +1,4 @@
-@extends('frontend.layouts.app')
-@section('content')
+<?php $__env->startSection('content'); ?>
     <!-- =======================
     Page Banner START -->
     <section class="py-0">
@@ -35,7 +34,7 @@
 
                             <!-- Image -->
                             <div class="col-md-6 text-center">
-                                <img src="{{asset('web')}}/assets/images/book/book-bg.svg" alt="">
+                                <img src="<?php echo e(asset('web')); ?>/assets/images/book/book-bg.svg" alt="">
                             </div>
                         </div> <!-- Row END -->
                     </div>
@@ -62,17 +61,17 @@
                             <h5 class="mb-0">All Listed Course</h5>
                         </div>
 
-                        @php
+                        <?php
                            $cources  = \App\Models\Course::where('status',1)->latest()->get();
                            $category = \App\Models\Category::where('status',1)->latest()->get();
-                        @endphp
+                        ?>
                         <!-- Select option -->
                         <div class="col-md-4 mt-3 mt-xl-0">
                             <div class="border-bottom p-2 input-borderless">
                                 <select class="js-choice" id="sortCourse">
-                                    @foreach($cources as $course)
-                                        <option value="{{$course->id}}">{{ $course->course_title }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $cources; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $course): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($course->id); ?>"><?php echo e($course->course_title); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
@@ -81,9 +80,9 @@
                         <div class="col-md-4 mt-3 mt-xl-0">
                             <div class="border-bottom p-2 input-borderless">
                                 <select id="filterCategory" class="js-choice">
-                                    @foreach($category as $value)
-                                        <option value="{{$value->id}}">{{ $value->name }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($value->id); ?>"><?php echo e($value->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
@@ -92,13 +91,13 @@
                     <!-- Search option END -->
                     <!-- Book Grid START -->
                     <div class="row g-4">
-                        @foreach($allCourses as $course)
+                        <?php $__currentLoopData = $allCourses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $course): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <!-- Card item START -->
                             <div class="col-sm-6 col-lg-4 col-xl-3">
                                 <div class="card shadow h-100">
                                     <div class="position-relative">
                                         <!-- Image -->
-                                        <img src="{{ asset($course->image)}}" class="card-img-top" style="height: 298px; width: 298px" alt="book image">
+                                        <img src="<?php echo e(asset($course->image)); ?>" class="card-img-top" style="height: 298px; width: 298px" alt="book image">
                                         <!-- Overlay -->
                                         <div class="card-img-overlay d-flex z-index-0 p-3">
                                             <!-- Card overlay Top -->
@@ -115,7 +114,7 @@
                                     <div class="card-body px-3">
                                         <!-- Title -->
                                         <h5 class="card-title mb-0">
-                                            <a href="{{route('course.details.page',encrypt($course->id))}}" class="stretched-link">{{$course->course_title}}</a>
+                                            <a href="<?php echo e(route('course.details.page',encrypt($course->id))); ?>" class="stretched-link"><?php echo e($course->course_title); ?></a>
                                         </h5>
                                     </div>
 
@@ -124,36 +123,36 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <a href="#"><span class="h6 fw-light mb-0">View Details</span></a>
                                             <!-- Price -->
-                                            <h5 class="text-success mb-0">৳ {{$course->price}} /-</h5>
+                                            <h5 class="text-success mb-0">৳ <?php echo e($course->price); ?> /-</h5>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- Card item END -->
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <!-- Book Grid END -->
                     <!-- Pagination START -->
                     <div class="col-12">
                         <nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
                             <ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                                @if ($allCourses->onFirstPage())
+                                <?php if($allCourses->onFirstPage()): ?>
                                     <li class="page-item mb-0 disabled"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-double-left"></i></a></li>
-                                @else
-                                    <li class="page-item mb-0"><a class="page-link" href="{{ $allCourses->previousPageUrl() }}" tabindex="-1"><i class="fas fa-angle-double-left"></i></a></li>
-                                @endif
-                                @for ($page = 1; $page <= $allCourses->lastPage(); $page++)
-                                    @if ($page == $allCourses->currentPage())
-                                        <li class="page-item mb-0 active"><a class="page-link" href="#">{{ $page }}</a></li>
-                                    @else
-                                        <li class="page-item mb-0"><a class="page-link" href="{{ $allCourses->url($page) }}">{{ $page }}</a></li>
-                                    @endif
-                                @endfor
-                                @if ($allCourses->hasMorePages())
-                                    <li class="page-item mb-0"><a class="page-link" href="{{ $allCourses->nextPageUrl() }}"><i class="fas fa-angle-double-right"></i></a></li>
-                                @else
+                                <?php else: ?>
+                                    <li class="page-item mb-0"><a class="page-link" href="<?php echo e($allCourses->previousPageUrl()); ?>" tabindex="-1"><i class="fas fa-angle-double-left"></i></a></li>
+                                <?php endif; ?>
+                                <?php for($page = 1; $page <= $allCourses->lastPage(); $page++): ?>
+                                    <?php if($page == $allCourses->currentPage()): ?>
+                                        <li class="page-item mb-0 active"><a class="page-link" href="#"><?php echo e($page); ?></a></li>
+                                    <?php else: ?>
+                                        <li class="page-item mb-0"><a class="page-link" href="<?php echo e($allCourses->url($page)); ?>"><?php echo e($page); ?></a></li>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
+                                <?php if($allCourses->hasMorePages()): ?>
+                                    <li class="page-item mb-0"><a class="page-link" href="<?php echo e($allCourses->nextPageUrl()); ?>"><i class="fas fa-angle-double-right"></i></a></li>
+                                <?php else: ?>
                                     <li class="page-item mb-0 disabled"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>
-                                @endif
+                                <?php endif; ?>
                             </ul>
                         </nav>
                     </div>
@@ -167,9 +166,9 @@
     Page content END -->
 
     <!-- =======================
-    @php
+    <?php
        $course = \App\Models\Course::limit(1)->latest()->first();
-    @endphp
+    ?>
 
     Action box START -->
     <section class="pt-0">
@@ -184,7 +183,7 @@
                         <div class="row g-3 align-items-center">
                             <!-- Image -->
                             <div class="col-sm-5 col-lg-12 col-xl-5">
-                                <img src="{{asset($course->image)}}" alt="" style="height: 210px;width: 210px">
+                                <img src="<?php echo e(asset($course->image)); ?>" alt="" style="height: 210px;width: 210px">
                             </div>
 
                             <!-- Content -->
@@ -201,7 +200,7 @@
                                 </ul>
 
                                 <!-- Title and price -->
-                                <h6 class="lead fw-bold mb-2">{{$course->course_title}}</h6>
+                                <h6 class="lead fw-bold mb-2"><?php echo e($course->course_title); ?></h6>
                                 <!-- Button -->
                                 <a href="#" class="btn btn-sm btn-purple mb-0">Buy now</a>
                             </div>
@@ -225,7 +224,7 @@
 
                             <!-- Image -->
                             <div class="col-sm-5 col-lg-12 col-xl-5">
-                                <img src="{{asset('web')}}/assets/images/element/29.svg" alt="">
+                                <img src="<?php echo e(asset('web')); ?>/assets/images/element/29.svg" alt="">
                             </div>
                         </div>
                     </div>
@@ -236,8 +235,8 @@
     </section>
     <!-- =======================
     Action box END -->
-@endsection
-@push('js')
+<?php $__env->stopSection(); ?>
+<?php $__env->startPush('js'); ?>
     <script>
         $(document).ready(function() {
             $('#sortCourse, #filterCategory').on('change', function() {
@@ -246,7 +245,7 @@
                 alert(sort);
                 alert(category);
                 $.ajax({
-                    url: "{{ route('courses.sort.filter') }}",  // Backend route
+                    url: "<?php echo e(route('courses.sort.filter')); ?>",  // Backend route
                     method: 'GET',
                     data: {
                         sort: sort,
@@ -261,4 +260,6 @@
         });
     </script>
 
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('frontend.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\xampp8.2\htdocs\learning-management-emu\resources\views/frontend/courses.blade.php ENDPATH**/ ?>
